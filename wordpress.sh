@@ -14,6 +14,8 @@ printf "========================================================================
 #	mysqlhost="localhost"
 #fi
 
+
+
 echo -n "New MariaDB Name: "
 read mariadb
 
@@ -31,6 +33,13 @@ done
 if [ "$mariadb" == "" ] || [ "$mariauser" == "" ] || [ "$mariapass" == "" ]; then
 	echo -n "This can't be empty"
 fi
+
+mysql -u root
+CREATE DATABASE $mariadb;
+CREATE USER $mariauser IDENTIFIED BY '$mariapass';
+GRANT ALL PRIVILEGES ON $mariadb.* TO $mariadb IDENTIFIED BY '$mariapass';
+FLUSH PRIVILEGES;
+EXIT;
 
 clear
 printf "=========================================================================\n"
