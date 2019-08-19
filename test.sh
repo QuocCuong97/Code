@@ -71,17 +71,17 @@ clear
 printf "=========================================================================\n"
 printf "Last Step: Configuration \n"
 printf "=========================================================================\n"
-rsync -avP ~/wordpress/ /var/www/html/
-    mkdir /var/www/html/wp-content/uploads
-    chown -R apache:apache /var/www/html/
-    cd /var/www/html/
-    cp wp-config-sample.php wp-config.php
-    sed -i -e "s/database_name_here/$mariadb/g" wp-config.php
-    sed -i -e "s/username_here/"$mariauser"/g" wp-config.php
-    sed -i -e "s/password_here/"$mariapass"/g" wp-config.php
-    # Tidy up
-    rmdir ~/wordpress
-    rm -f ~/latest.tar.gz
+rsync -avP ~/Desktop/wordpress/ /var/www/html/
+mkdir /var/www/html/wp-content/uploads
+chown -R apache:apache /var/www/html/
+cd /var/www/html/
+cp wp-config-sample.php wp-config.php
+sed -i -e "s/database_name_here/$mariadb/g" wp-config.php
+sed -i -e "s/username_here/"$mariauser"/g" wp-config.php
+sed -i -e "s/password_here/"$mariapass"/g" wp-config.php
+# Tidy up
+rmdir ~/wordpress
+rm -f ~/latest.tar.gz
 
 clear
 printf "=========================================================================\n"
