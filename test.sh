@@ -5,17 +5,21 @@ DIRECTORY=$(cd `dirname $0` && pwd)
 create_database(){
 echo -n "New MariaDB Name: "
 read mariadb
+
 echo -n "New MariaDB User: "
 read mariauser
+
 echo -n "Password: "
 read mariapass
+
 if [ "$mariadb" != "" ] && [ "$mariauser" != "" ] && [ "$mariapass" != "" ]; then
 	break
 fi
-
+done
 if [ "$mariadb" == "" ] || [ "$mariauser" == "" ] || [ "$mariapass" == "" ]; then
 	echo -n "This can't be empty"
 fi
+done
 mysql -u root <<MYSQL_SCRIPT
 CREATE DATABASE $mariadb;
 CREATE USER $mariauser IDENTIFIED BY '$mariapass';
