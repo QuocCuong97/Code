@@ -2,16 +2,6 @@
 ## Install Wordpress on CentOS7
 DIRECTORY=$(cd `dirname $0` && pwd)
 
-create_database(){
-echo -n "New MariaDB Name: "
-read mariadb
-
-echo -n "New MariaDB User: "
-read mariauser
-
-echo -n "Password: "
-read mariapass
-
 ## if [ "$mariadb" != "" ] && [ "$mariauser" != "" ] && [ "$mariapass" != "" ]; then
 ##	break
 ## fi
@@ -21,14 +11,6 @@ read mariapass
 ## 	echo -n "This can't be empty"
 ## fi
 
-mysql -u root <<MYSQL_SCRIPT
-CREATE DATABASE $mariadb;
-CREATE USER $mariauser IDENTIFIED BY '$mariapass';
-GRANT ALL PRIVILEGES ON $mariadb.* TO $mariadb IDENTIFIED BY '$mariapass';
-FLUSH PRIVILEGES;
-exit;
-MYSQL_SCRIPT
-}
 install_php(){
     yum install -y php-gd php-mysql
     systemctl restart httpd
@@ -56,7 +38,22 @@ printf "WordPress Installation on CentOS 7 - Edited by Cuo\n"
 printf "=========================================================================\n"
 printf "First Step: Creat Database\n"
 printf "=========================================================================\n"
-create_database()
+echo -n "New MariaDB Name: "
+read mariadb
+
+echo -n "New MariaDB User: "
+read mariauser
+
+echo -n "Password: "
+read mariapass
+
+mysql -u root <<MYSQL_SCRIPT
+CREATE DATABASE $mariadb;
+CREATE USER $mariauser IDENTIFIED BY '$mariapass';
+GRANT ALL PRIVILEGES ON $mariadb.* TO $mariadb IDENTIFIED BY '$mariapass';
+FLUSH PRIVILEGES;
+exit;
+MYSQL_SCRIPT
 
 clear
 printf "=========================================================================\n"
