@@ -2,7 +2,7 @@
 while [ 1 ];do
 clear
 printf "=========================================================================\n"
-printf "WordPress Installation - Edited by Cuo\n"
+printf "WordPress Installation on CentOS 7 - Edited by Cuo\n"
 printf "=========================================================================\n"
 printf "First Step: Creat Database\n"
 printf "=========================================================================\n"
@@ -33,6 +33,7 @@ done
 if [ "$mariadb" == "" ] || [ "$mariauser" == "" ] || [ "$mariapass" == "" ]; then
 	echo -n "This can't be empty"
 fi
+done
 
 mysql -u root
 CREATE DATABASE $mariadb;

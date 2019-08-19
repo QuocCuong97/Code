@@ -2,15 +2,6 @@
 ## Install Wordpress on CentOS7
 DIRECTORY=$(cd `dirname $0` && pwd)
 
-## if [ "$mariadb" != "" ] && [ "$mariauser" != "" ] && [ "$mariapass" != "" ]; then
-##	break
-## fi
-## done
-
-## if [ "$mariadb" == "" ] || [ "$mariauser" == "" ] || [ "$mariapass" == "" ]; then
-## 	echo -n "This can't be empty"
-## fi
-
 install_php(){
     yum install -y php-gd php-mysql
     systemctl restart httpd
