@@ -19,19 +19,19 @@ install_wordpress(){
     wget http://wordpress.org/latest.tar.gz
     tar -zxf latest.tar.gz
 }
-#config_wordpress(){
-   #rsync -avP ~/wordpress/ /var/www/html/
-    #mkdir /var/www/html/wp-content/uploads
-    #chown -R apache:apache /var/www/html/
-    #cd /var/www/html/
-    #cp wp-config-sample.php wp-config.php
-    #sed -i -e "s/database_name_here/$mariadb/g" wp-config.php
-    #sed -i -e "s/username_here/"$mariauser"/g" wp-config.php
-    #sed -i -e "s/password_here/"$mariapass"/g" wp-config.php
+config_wordpress(){
+    rsync -avP ~/Desktop/wordpress/ /var/www/html/
+    mkdir /var/www/html/wp-content/uploads
+    chown -R apache:apache /var/www/html/
+    cd /var/www/html/
+    cp wp-config-sample.php wp-config.php
+    sed -i -e "s/database_name_here/$mariadb/g" wp-config.php
+    sed -i -e "s/username_here/"$mariauser"/g" wp-config.php
+    sed -i -e "s/password_here/"$mariapass"/g" wp-config.php
     # Tidy up
-    #rmdir ~/wordpress
-    #rm -f ~/latest.tar.gz
-#}
+    rmdir ~/wordpress
+    rm -f ~/latest.tar.gz
+}
 clear
 printf "=========================================================================\n"
 printf "WordPress Installation on CentOS 7 - Edited by Cuo\n"
@@ -50,7 +50,7 @@ read mariapass
 mysql -u root <<MYSQL_SCRIPT
 CREATE DATABASE $mariadb;
 CREATE USER $mariauser IDENTIFIED BY '$mariapass';
-GRANT ALL PRIVILEGES ON $mariadb.* TO $mariadb IDENTIFIED BY '$mariapass';
+GRANT ALL PRIVILEGES ON $mariadb.* TO $mariadbuser IDENTIFIED BY '$mariapass';
 FLUSH PRIVILEGES;
 exit;
 MYSQL_SCRIPT
@@ -71,17 +71,7 @@ clear
 printf "=========================================================================\n"
 printf "Last Step: Configuration \n"
 printf "=========================================================================\n"
-rsync -avP ~/Desktop/wordpress/ /var/www/html/
-mkdir /var/www/html/wp-content/uploads
-chown -R apache:apache /var/www/html/
-cd /var/www/html/
-cp wp-config-sample.php wp-config.php
-sed -i -e "s/database_name_here/$mariadb/g" wp-config.php
-sed -i -e "s/username_here/"$mariauser"/g" wp-config.php
-sed -i -e "s/password_here/"$mariapass"/g" wp-config.php
-# Tidy up
-rmdir ~/wordpress
-rm -f ~/latest.tar.gz
+config_wordpress
 
 clear
 printf "=========================================================================\n"
