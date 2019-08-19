@@ -12,7 +12,6 @@ read mariapass
 if [ "$mariadb" != "" ] && [ "$mariauser" != "" ] && [ "$mariapass" != "" ]; then
 	break
 fi
-done
 
 if [ "$mariadb" == "" ] || [ "$mariauser" == "" ] || [ "$mariapass" == "" ]; then
 	echo -n "This can't be empty"
