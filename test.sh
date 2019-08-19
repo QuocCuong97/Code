@@ -29,8 +29,8 @@ config_wordpress(){
     sed -i -e "s/username_here/"$mariauser"/g" wp-config.php
     sed -i -e "s/password_here/"$mariapass"/g" wp-config.php
     # Tidy up
-    rmdir ~/wordpress
-    rm -f ~/latest.tar.gz
+    rmdir ~/Desktop/wordpress
+    rm -f ~/Desktop/latest.tar.gz
 }
 clear
 printf "=========================================================================\n"
@@ -50,7 +50,7 @@ read mariapass
 mysql -u root <<MYSQL_SCRIPT
 CREATE DATABASE $mariadb;
 CREATE USER $mariauser IDENTIFIED BY '$mariapass';
-GRANT ALL PRIVILEGES ON $mariadb.* TO $mariadbuser IDENTIFIED BY '$mariapass';
+GRANT ALL PRIVILEGES ON $mariadb.* TO $mariauser IDENTIFIED BY '$mariapass';
 FLUSH PRIVILEGES;
 exit;
 MYSQL_SCRIPT
