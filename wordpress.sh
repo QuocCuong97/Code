@@ -15,7 +15,7 @@ create_database(){
     read mariauser
 
     echo -n "Password: "
-    read -sp mariapass
+    read mariapass
 
 mysql -u root <<EOF
 CREATE DATABASE $mariadb;
