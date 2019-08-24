@@ -49,7 +49,7 @@ disable_password(){
     if [ "$ans" = "Y" ] 
     then
     sed -i -e "s/\#PubkeyAuthentication yes/PubkeyAuthentication yes/g" /etc/ssh/sshd_config
-    sed -i -e "s/PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
+    sed -i -e "s/\#PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
     else
         echo -n "Nothing changed! \n"
     fi
@@ -60,4 +60,4 @@ disable_password
 max_auth_tries
 max_sessions
 systemctl restart sshd
-
+# Script sẽ được bổ sung thêm các tùy chọn khác....

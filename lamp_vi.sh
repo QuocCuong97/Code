@@ -1,4 +1,5 @@
 #!/bin/bash
+# Cài đặt dịch vụ Web Server Apache
 install_httpd(){
     yum install -y httpd
     systemctl start httpd
@@ -6,6 +7,7 @@ install_httpd(){
     firewall-cmd --zone=public --permanent --add-service=http
     firewall-cmd --reload
 }
+# Cài đặt dịch vụ Database MariaDB
 install_mariadb(){
 echo "[mariadb]
 name = MariaDB
@@ -17,6 +19,7 @@ gpgcheck=1" > /etc/yum.repos.d/MariaDB.repo
     systemctl start mariadb.service
     systemctl enable mariadb.service
 }
+# Cài đặt PHP
 install_php(){
     yum install -y epel-release
     yum install -y yum-utils
@@ -33,25 +36,24 @@ install_php(){
 
 clear
 printf "=========================================================================\n"
-printf "******************LAMP Installation - Edited by Cuo**********************\n"
+printf "****************Script cài đặt LAMP Stack - Edited by Cuo****************\n"
 printf "=========================================================================\n"
-printf "First Step: Install Apache 2.4.6\n"
+printf "Bước 1: Cài đặt Apache 2.4.6\n"
 printf "====================================\n"
 install_httpd
 
 clear
 printf "=========================================================================\n"
-printf "Second Step: Install MariaDB 10.4.7\n"
+printf "Bước 2: Cài đặt MariaDB 10.4.7\n"
 printf "=======================================\n"
 install_mariadb
 
 clear
 printf "=========================================================================\n"
-printf "Last Step: Install PHP 7.3.8\n"
+printf "Bước cuối cùng: Cài đặt PHP 7.3.8\n"
 printf "================================\n"
 install_php
 
 printf "=========================================================================\n"
-printf "Install successfully , enjoy LAMP! \n"
+printf "Cài đặt LAMP Stack thành công trên node của bạn! \n"
 printf "=========================================================================\n"
-printf "Do you want to show LAMP status? [Y/n]"
