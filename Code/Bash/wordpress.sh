@@ -4,7 +4,7 @@ DIRECTORY=$(cd `dirname $0` && pwd)
 create_database(){
     echo -n "MariaDB Host (localhost): "
     read mariahost
-    if [ "$mysqlhost" = "" ]
+    if [ "$mariahost" = "" ]
     then
 	mariahost="localhost"
     fi
