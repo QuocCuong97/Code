@@ -48,7 +48,7 @@ config_wordpress(){
     sed -i -e "s/username_here/"$mariauser"/g" wp-config.php
     sed -i -e "s/password_here/"$mariapass"/g" wp-config.php
     # Xóa file đã download
-    rmdir -f /tmp/wordpress
+    rm -Rf /tmp/wordpress
     rm -f /tmp/latest.tar.gz
 }
 clear
