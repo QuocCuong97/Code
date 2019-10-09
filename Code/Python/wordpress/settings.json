@@ -1,0 +1,6 @@
+{
+    "mariahost": "localhost",
+    "mariadb": "wordpress",
+    "mariauser": "wordpressuser",
+    "mariapass": "P@ssw0rd"
+}
