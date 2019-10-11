@@ -1,6 +1,8 @@
 {
-    "mariahost": "localhost",
-    "mariadb": "wordpress",
-    "mariauser": "wordpressuser",
+    "user_access": "root", 
+    "password_access": "P@ssw0rd",
+    "host_access": "localhost", 
+    "datatabase_name": "wordpress", 
+    "mariauser": "wordpressuser", 
     "mariapass": "P@ssw0rd"
 }
