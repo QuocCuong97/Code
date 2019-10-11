@@ -13,8 +13,8 @@ def read_info():
 # Function creat new Database
 def creat_database():
     os.system("pip install mysql-connector-python")
-    import mysql.connector as mariadb
-    mydb = mariadb.connect(host=str(dic["host_access"]), user=str(dic["user_access"]), password=str(dic["password_access"]))
+    import mysql.connector
+    mydb = mysql.connector.connect(host=str(dic["host_access"]), user=str(dic["user_access"]), password=str(dic["password_access"]))
     mycursor = mydb.cursor()
     mycursor.execute("CREATE DATABASE %s" %(str(dic["database_name"])))
     mycursor.execute("CREATE USER %s@%s IDENTIFIED BY '%s';" %(str(dic["mariauser"]), str(dic["host_access"]), str(dic["mariapass"])))
@@ -36,7 +36,7 @@ def install_php():
 
 # Function install WordPress
 def install_wordpress():
-    os.system("cd /tmp")
+    os.chdir("/tmp")
     os.system("wget http://wordpress.org/latest.tar.gz")
     os.system("tar -zxf latest.tar.gz")
 
@@ -45,15 +45,15 @@ def config_wordpress():
     os.system("rsync -avP /tmp/wordpress/ /var/www/html/")
     os.system("mkdir /var/www/html/wp-content/uploads")
     os.system("chown -R apache:apache /var/www/html/")
-    os.system("cd /var/www/html/")
+    os.chdir("/var/www/html/")
     os.system("cp wp-config-sample.php wp-config.php")
-    op_1 = open("wp-config.php", "rt")
+    op_1 = open("/var/www/html/wp-config.php", "rt")
     re_1 = op_1.read()
     rep_1 = re.sub("database_name_here", str(dic["database_name"]), re_1)
     rep_2 = re.sub("username_here", str(dic["mariauser"]), rep_1)
     rep_3 = re.sub("password_here", str(dic["mariapass"]), rep_2)
     op_1.close()
-    op_2 = open("wp-config.php", "wt")
+    op_2 = open("/var/www/html/wp-config.php", "wt")
     op_2.write(rep_3)
     # Tidy up
     os.system("rm -Rf /tmp/wordpress")

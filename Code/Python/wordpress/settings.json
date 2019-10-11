@@ -2,7 +2,7 @@
     "user_access": "root", 
     "password_access": "P@ssw0rd",
     "host_access": "localhost", 
-    "datatabase_name": "wordpress", 
+    "database_name": "wordpress", 
     "mariauser": "wordpressuser", 
     "mariapass": "P@ssw0rd"
 }
