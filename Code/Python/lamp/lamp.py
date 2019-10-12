@@ -45,9 +45,9 @@ def check_httpd():
     ver = str(d[1])
     stt = subprocess.getoutput("systemctl status httpd | grep 'active (running)'")
     if stt:
-        print("Apache Version:", ver, "----status: active (running)")
+        print("Apache Version:", ver, "----status:", "\033[1;32mactive (running)", "\033[0m")
     else:
-        print("Apache Version:", ver, "----status: inactive (dead)")
+        print("Apache Version:", ver, "----status:", "\033[1;32minactive (dead)", "\033[0m")
 
 # Function check status mariadb
 def check_mariadb():
@@ -58,9 +58,9 @@ def check_mariadb():
     ver = str(d[0])
     stt = subprocess.getoutput("systemctl status mariadb | grep 'active (running)'")
     if stt:
-        print("MariaDB Version:", ver, "----status: active (running)")
+        print("MariaDB Version:", ver, "----status:", "\033[1;32mactive (running)", "\033[0m")
     else:
-        print("MariaDB Version:", ver, "----status: inactive (dead)")
+        print("MariaDB Version:", ver, "----status:", "\033[1;32minactive (dead)", "\033[0m")
 
 # Function check status PHP
 def check_php():
