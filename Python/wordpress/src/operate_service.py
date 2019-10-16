@@ -15,7 +15,7 @@ def status(service_name):
 def firewalld(serice_name):
     os.system("firewall-cmd --zone=public --permanent --add-service=%s" %serice_name)
     os.system('firewall-cmd --reload')
-    s
+    
 def check_os():
     op = open("/etc/os-release", "rt")
     re_1 = op.read()

@@ -1,93 +1,117 @@
 import os
 import re
 import subprocess
-import json
+from src import operate_service
 
-# Function read database info
-def read_info():
-    x = open("settings.json", "r")
-    y = x.read()
-    global dic
-    dic = json.loads(y)
+os_name = operate_service.check_os()
+if os_name == "Ubuntu":
+    check_apache2 = os.path.exists("/lib/systemd/system/apache2.service")
+    if check_apache2 == False:
+        from src import lamp_ubuntu
+        lamp_ubuntu.install_apache2()
+    else:
+        pass
+    check_mariadb = os.path.exists("/lib/systemd/system/mariadb.service")
+    if check_mariadb == False:
+        from src import lamp_ubuntu
+        lamp_ubuntu.install_mariadb()
+    else:
+        pass
+    check_php = os.path.exists("/usr/bin/php")
+    if check_php == False:
+        from src import lamp_ubuntu
+        lamp_ubuntu.install_php()
+    else:
+        pass
+    from src import wordpress_ubuntu
+    os.system("clear")
+    print("=========================================================================")
+    print("*********WordPress Installation on Ubuntu - Edited by Cuo**************")
+    print("=========================================================================")
+    print("First Step: Connect Database")
+    print("==============================")
+    wordpress_ubuntu.read_info()
+    wordpress_ubuntu.install_pip()
+    wordpress_ubuntu.creat_database()
 
-# Function creat new Database
-def creat_database():
-    os.system("pip install mysql-connector-python")
-    import mysql.connector
-    mydb = mysql.connector.connect(host=str(dic["host_access"]), user=str(dic["user_access"]), password=str(dic["password_access"]))
-    mycursor = mydb.cursor()
-    mycursor.execute("CREATE DATABASE %s" %(str(dic["database_name"])))
-    mycursor.execute("CREATE USER %s@%s IDENTIFIED BY '%s';" %(str(dic["mariauser"]), str(dic["host_access"]), str(dic["mariapass"])))
-    mycursor.execute("GRANT ALL PRIVILEGES ON %s.* TO '%s'@'%s';" %(str(dic["database_name"]), str(dic["mariauser"]), str(dic["host_access"])))
-    mycursor.execute("FLUSH PRIVILEGES")
-    mydb.close()
+    os.system("clear")
+    print("=========================================================================")
+    print("Second Step: Download some PHP modules")
+    print("===========================================")
+    wordpress_ubuntu.install_php()
 
-# Function install PIP
-def install_pip():
-    os.system("yum install -y curl")
-    os.system("curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py")
-    os.system("python3 get-pip.py")
-    os.system("rm -f get-pip.py")                     # Clean-up
+    os.system("clear")
+    print("=========================================================================")
+    print("Third Step: Download the lastest version of WordPress")
+    print("==========================================================")
+    wordpress_ubuntu.install_wordpress()
 
-# Function install PHP-MySQL
-def install_php():
-    os.system("yum install -y php-gd php-mysql")
-    os.system("systemctl restart httpd")
+    os.system("clear")
+    print("=========================================================================")
+    print("Last Step: Configuration")
+    print("=============================")
+    wordpress_ubuntu.config_wordpress()
 
-# Function install WordPress
-def install_wordpress():
-    os.chdir("/tmp")
-    os.system("wget http://wordpress.org/latest.tar.gz")
-    os.system("tar -zxf latest.tar.gz")
+    os.system("clear")
+    print("=========================================================================")
+    print("Install successfully , enjoy WordPress!")
+    print("=========================================================================")
+elif os_name == "CentOS":
+    check_httpd = os.path.exists("/lib/systemd/system/httpd.service")
+    if check_httpd == False:
+        from src import lamp_centos
+        lamp_centos.install_httpd()
+    else:
+        pass
+    check_mariadb = os.path.exists("/lib/systemd/system/mariadb.service")
+    if check_mariadb == False:
+        from src import lamp_centos
+        lamp_centos.install_mariadb()
+    else:
+        pass
+    check_php = os.path.exists("/usr/bin/php")
+    if check_php == False:
+        from src import lamp_centos
+        lamp_centos.install_php()
+    else:
+        pass
+    from src import wordpress_centos
+    os.system("clear")
+    print("=========================================================================")
+    print("*********WordPress Installation on CentOS 7 - Edited by Cuo**************")
+    print("=========================================================================")
+    print("First Step: Connect Database")
+    print("==============================")
+    wordpress_centos.read_info()
+    wordpress_centos.install_pip()
+    wordpress_centos.creat_database()
 
-# Function configure WordPress
-def config_wordpress():
-    os.system("rsync -avP /tmp/wordpress/ /var/www/html/")
-    os.system("mkdir /var/www/html/wp-content/uploads")
-    os.system("chown -R apache:apache /var/www/html/")
-    os.chdir("/var/www/html/")
-    os.system("cp wp-config-sample.php wp-config.php")
-    op_1 = open("/var/www/html/wp-config.php", "rt")
-    re_1 = op_1.read()
-    rep_1 = re.sub("database_name_here", str(dic["database_name"]), re_1)
-    rep_2 = re.sub("username_here", str(dic["mariauser"]), rep_1)
-    rep_3 = re.sub("password_here", str(dic["mariapass"]), rep_2)
-    op_1.close()
-    op_2 = open("/var/www/html/wp-config.php", "wt")
-    op_2.write(rep_3)
-    # Tidy up
-    os.system("rm -Rf /tmp/wordpress")
-    os.system("rm -f /tmp/latest.tar.gz")
+    os.system("clear")
+    print("=========================================================================")
+    print("Second Step: Download some PHP modules")
+    print("===========================================")
+    wordpress_centos.install_php()
 
-os.system("clear")
-print("=========================================================================")
-print("*********WordPress Installation on CentOS 7 - Edited by Cuo**************")
-print("=========================================================================")
-print("First Step: Creat Database")
-print("==============================")
-read_info()
-install_pip()
-creat_database()
+    os.system("clear")
+    print("=========================================================================")
+    print("Third Step: Download the lastest version of WordPress")
+    print("==========================================================")
+    wordpress_centos.install_wordpress()
 
-os.system("clear")
-print("=========================================================================")
-print("Second Step: Download some PHP modules")
-print("===========================================")
-install_php()
+    os.system("clear")
+    print("=========================================================================")
+    print("Last Step: Configuration")
+    print("=============================")
+    wordpress_centos.config_wordpress()
 
-os.system("clear")
-print("=========================================================================")
-print("Third Step: Download the lastest version of WordPress")
-print("==========================================================")
-install_wordpress()
+    os.system("clear")
+    print("=========================================================================")
+    print("Install successfully , enjoy WordPress!")
+    print("=========================================================================")
+else:
+    print("OS not supported!")
 
-os.system("clear")
-print("=========================================================================")
-print("Last Step: Configuration")
-print("=============================")
-config_wordpress()
 
-os.system("clear")
-print("=========================================================================")
-print("Install successfully , enjoy WordPress!")
-print("=========================================================================")
+
+
+    
