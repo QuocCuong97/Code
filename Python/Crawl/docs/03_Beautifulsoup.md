@@ -231,6 +231,7 @@
 - Một string sẽ không thể chứa `.contents` .
 - 
 
-https://viblo.asia/p/pymotm-beautiful-soup-4-part-ii-amoG81yOvz8P
-https://viblo.asia/p/pymotm-beautiful-soup-4-part-iii-XqaGEBJEeWK
-https://beautiful-soup-4.readthedocs.io/en/latest/#
+https://viblo.asia/p/pymotm-beautiful-soup-4-part-ii-amoG81yOvz8P<br>
+https://viblo.asia/p/pymotm-beautiful-soup-4-part-iii-XqaGEBJEeWK<br>
+https://beautiful-soup-4.readthedocs.io/en/latest/#<br>
+https://www.crummy.com/software/BeautifulSoup/bs3/documentation.html
