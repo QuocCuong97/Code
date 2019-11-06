@@ -1,5 +1,5 @@
 # Telegram Bot
-## **1) Tạo Bot**
+## **1) Tạo Channel**
 - **B1 :** Trên **Telegram Desktop** , chọn **New Channel** để tạo channel mới :
     
     <img src=https://i.imgur.com/NVCTitS.png>
@@ -11,7 +11,11 @@
 - **B4 :** Channel được tạo thành công :
     <p align=center><img src=https://i.imgur.com/K6gVGG8.png width=70%></p>
 
-## **2) Cài đặt module Telegram**
+## **2) Tạo Bot**
+- **B1 :** Tạo Bot với **BotFather** :
+
+## **3) Cài đặt module Telegram**
 - Cài đặt module `python-telegram-bot` :
     ```
-    $ pip i
+    $ sudo pip install python-telegram-bot
+    ```
