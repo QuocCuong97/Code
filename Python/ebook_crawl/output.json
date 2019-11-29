@@ -1,0 +1,242 @@
+[
+    {
+        "title": "Introducing Mechanisms and APIs for Memory Management",
+        "link": "https://www.foxebook.net/introducing-mechanisms-and-apis-for-memory-management/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Designing Microservices with Django: An Overview of Tools and Practices",
+        "link": "https://www.foxebook.net/designing-microservices-with-django-an-overview-of-tools-and-practices/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Expert Performance Indexing in SQL Server 2019, 3rd Edition",
+        "link": "https://www.foxebook.net/expert-performance-indexing-in-sql-server-2019-3rd-edition/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Beginning MATLAB and Simulink: From Novice to Professional",
+        "link": "https://www.foxebook.net/beginning-matlab-and-simulink-from-novice-to-professional/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Automated Testing in Microsoft Dynamics 365 Business Central",
+        "link": "https://www.foxebook.net/automated-testing-in-microsoft-dynamics-365-business-central/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Cloud Analytics with Microsoft Azure",
+        "link": "https://www.foxebook.net/cloud-analytics-with-microsoft-azure/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Mastering Delphi Programming: A Complete Reference Guide",
+        "link": "https://www.foxebook.net/mastering-delphi-programming-a-complete-reference-guide/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Big Data: 7th CCF Conference",
+        "link": "https://www.foxebook.net/big-data-7th-ccf-conference/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Getting Started with Visual Studio 2019: Learning and Implementing New Features",
+        "link": "https://www.foxebook.net/getting-started-with-visual-studio-2019-learning-and-implementing-new-features/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Graphical Models for Security: 6th International Workshop",
+        "link": "https://www.foxebook.net/graphical-models-for-security-6th-international-workshop/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Linux Observability with BPF",
+        "link": "https://www.foxebook.net/linux-observability-with-bpf/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Fundamentals of Linux: Explore the essentials of the Linux command line",
+        "link": "https://www.foxebook.net/fundamentals-of-linux-explore-the-essentials-of-the-linux-command-line/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "The Decision Maker’s Handbook to Data Science, 2nd Edition",
+        "link": "https://www.foxebook.net/the-decision-makers-handbook-to-data-science-2nd-edition/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Reactive Application Development",
+        "link": "https://www.foxebook.net/reactive-application-development/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Security Fundamentals",
+        "link": "https://www.foxebook.net/security-fundamentals/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Mining Social Media: Finding Stories in Internet Data",
+        "link": "https://www.foxebook.net/mining-social-media-finding-stories-in-internet-data/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "SQL Server Big Data Clusters: Early First Edition Based on Release Candidate 1",
+        "link": "https://www.foxebook.net/sql-server-big-data-clusters-early-first-edition-based-on-release-candidate-1/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Machine Learning for Cybersecurity Cookbook",
+        "link": "https://www.foxebook.net/machine-learning-for-cybersecurity-cookbook/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "OCP Oracle Certified Professional Java SE 11 Programmer I Study Guide: Exam 1Z0-815",
+        "link": "https://www.foxebook.net/ocp-oracle-certified-professional-java-se-11-programmer-i-study-guide-exam-1z0-815/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Practical Web Inclusion and Accessibility: A Comprehensive Guide to Access Needs",
+        "link": "https://www.foxebook.net/practical-web-inclusion-and-accessibility-a-comprehensive-guide-to-access-needs/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Microservices in Big Data Analytics: Second International, ICETCE 2019",
+        "link": "https://www.foxebook.net/microservices-in-big-data-analytics-second-international-icetce-2019/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Complex Systems Design & Management",
+        "link": "https://www.foxebook.net/complex-systems-design-management/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "AI 2019: Advances in Artificial Intelligence",
+        "link": "https://www.foxebook.net/ai-2019-advances-in-artificial-intelligence/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Web Components in Action",
+        "link": "https://www.foxebook.net/web-components-in-action/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Machine Learning with TensorFlow",
+        "link": "https://www.foxebook.net/machine-learning-with-tensorflow/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Java EE 8 and Angular",
+        "link": "https://www.foxebook.net/java-ee-8-and-angular/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Monolith to Microservices: Evolutionary Patterns to Transform Your Monolith",
+        "link": "https://www.foxebook.net/monolith-to-microservices-evolutionary-patterns-to-transform-your-monolith/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Architecting Angular Applications with Redux, RxJS, and NgRx",
+        "link": "https://www.foxebook.net/architecting-angular-applications-with-redux-rxjs-and-ngrx/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Cloud Native Data Center Networking: Architecture, Protocols, and Tools",
+        "link": "https://www.foxebook.net/cloud-native-data-center-networking-architecture-protocols-and-tools/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Mastering Azure Serverless Computing",
+        "link": "https://www.foxebook.net/mastering-azure-serverless-computing/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Hands-On Markov Models with Python",
+        "link": "https://www.foxebook.net/hands-on-markov-models-with-python/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "WebAssembly in Action",
+        "link": "https://www.foxebook.net/webassembly-in-action/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Programming with Types",
+        "link": "https://www.foxebook.net/programming-with-types/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Docker in Action, 2nd Edition",
+        "link": "https://www.foxebook.net/docker-in-action-2nd-edition/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Hands-On Docker for Microservices with Python",
+        "link": "https://www.foxebook.net/hands-on-docker-for-microservices-with-python/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Python API Development Fundamentals",
+        "link": "https://www.foxebook.net/python-api-development-fundamentals/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Typescript 3.0 Projects",
+        "link": "https://www.foxebook.net/typescript-3-0-projects/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "The Successful Software Manager",
+        "link": "https://www.foxebook.net/the-successful-software-manager/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "ArcGIS Pro 2.x Cookbook",
+        "link": "https://www.foxebook.net/arcgis-pro-2-x-cookbook/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Mastering Concurrency in Python",
+        "link": "https://www.foxebook.net/mastering-concurrency-in-python/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Kotlin Cookbook: A Problem-Focused Approach",
+        "link": "https://www.foxebook.net/kotlin-cookbook-a-problem-focused-approach/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Real-time Linked Dataspaces",
+        "link": "https://www.foxebook.net/real-time-linked-dataspaces/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Learning C# by Programming Games, 2nd Edition",
+        "link": "https://www.foxebook.net/learning-c-by-programming-games-2nd-edition/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Bitcoin and Lightning Network on Raspberry Pi",
+        "link": "https://www.foxebook.net/bitcoin-and-lightning-network-on-raspberry-pi/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Pro Spring Security, 2nd Edition",
+        "link": "https://www.foxebook.net/pro-spring-security-2nd-edition/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Understanding Azure Monitoring: Includes IaaS and PaaS Scenarios",
+        "link": "https://www.foxebook.net/understanding-azure-monitoring-includes-iaas-and-paas-scenarios/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Experiment-Driven Product Development",
+        "link": "https://www.foxebook.net/experiment-driven-product-development/",
+        "source": "FoxEbook"
+    },
+    {
+        "title": "Python Projects for Beginners",
+        "link": "https://www.foxebook.net/python-projects-for-beginners/",
+        "source": "FoxEbook"
+    }
+]

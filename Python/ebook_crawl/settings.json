@@ -1,0 +1,17 @@
+[
+    {
+        "db_host": "localhost",
+        "db_username": "webcrawl_user",
+        "db_password": "P@ssw0rd",
+        "db_database": "ebook_crawl"
+    },
+    {
+        "telegram_token": "788128271:AAGgK5F33pz4IuLvRDrER3R7mTuKQ0-IpOA",
+        "telegram_chatid": "-1001317017795"
+    },
+    {
+        "email_sender": "devtechnical024@gmail.com",
+        "password_sender": "Nhanhoa@001",
+        "mail_target": "/home/cuongnq/code/mail_target.txt"
+    }
+]
