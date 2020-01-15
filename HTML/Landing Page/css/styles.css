@@ -1,0 +1,27 @@
+body {
+    font-family: 'Montserrat';
+}
+#logo {
+    width: 80%;
+}
+
+#right-logo {
+    width: 50%;
+}
+#navbarResponsive {
+    vertical-align: middle;
+}
+.nav-text {
+    color: black;
+    font-family: 'Roboto';
+    margin: 1px;
+}
+.nav-text-special {
+    font-family: 'Roboto';
+    background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+section.mastheadx {
+    background-image: url("../img/masthead.jpg");
+}
