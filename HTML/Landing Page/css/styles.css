@@ -22,6 +22,6 @@ body {
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
-section.masthead {
+header {
     background-image: url("../img/masthead.jpg");
 }
