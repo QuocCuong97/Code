@@ -1,5 +1,6 @@
 body {
     font-family: 'Montserrat';
+    background-color: #1a1a1a;
 }
 #logo {
     width: 90%;
@@ -25,14 +26,143 @@ body {
     -webkit-text-fill-color: transparent;
     margin-top: 1px;
 }
-header.masthead {
-    position: relative;
-    background: url("../img/masthead3.jpg") no-repeat center center;
-    background-color: #343a40;
-    background-size: cover;
-    padding-top: 8rem;
-    padding-bottom: 8rem;
-}
+
 .masthead-heading {
     font-size: 3rem;
+    color: white;
+    z-index: 2;
+    position: relative;
+}
+#last-footer {
+    background-color: #1a1a1a;
+    color: white;
+}
+#theme, #feedback {
+    background-color: #1a1a1a;
+    color: white;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+li > a {
+    color: white;
+}
+li > a:hover {
+    color: white;
+}
+
+header {
+    position: relative;
+    background-color: black;
+    height: 100vh;
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+  
+header video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+  
+header .container {
+    position: relative;
+    z-index: 2;
+}
+  
+header .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 1;
+}
+footer {
+    position: relative;
+    background-color: black;
+    height: auto;
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+  
+footer video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+  
+footer .container {
+    position: relative;
+    z-index: 2;
+}
+  
+footer .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+#heading {
+    font-size: 400%;
+    font-weight: bolder;
+}
+
+hr {
+    width: 30%;
+    background-color: blue;
+    height: 0.2px;
+    border: none;
+}
+.features-icon {
+    font-size: 350%;
+    color: white;
+}
+.features-title {
+    font-size: 150%;
+    color: white;
+    padding-bottom: 30px;
+}
+.footer-icon {
+    font-size: 200%;
+    margin-right: 1.5rem;
+}
+
+#youtube {
+    border: none;
+    width: 50%;
+    height: 250px;
+}
+
+.benefit-image {
+    margin-right: 300px;
 }
