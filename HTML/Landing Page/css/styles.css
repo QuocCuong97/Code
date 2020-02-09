@@ -159,10 +159,19 @@ hr {
 
 #youtube {
     border: none;
-    width: 50%;
+    width: 60%;
     height: 250px;
 }
 
 .benefit-image {
     margin-right: 300px;
+}
+
+#QA {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#contact {
+    color: white;
 }

@@ -20,6 +20,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <!--Owl Carousel-->
+  <link rel="stylesheet" href="owlcarousel/dist/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="owlcarousel/dist/assets/owl.theme.default.min.css">
+  <script src="owlcarousel/dist/owl.carousel.min.js"></script>
   <!-- Custom CSS -->
   <link href="css/styles.css" rel="stylesheet" type="text/css">
 
@@ -80,7 +84,7 @@
             <h1 id="heading">QUẢN LÝ HỆ THỐNG TRONG TẦM TAY</h1>
             <h3 class="mt-5 mb-5">Nhanh hơn - Tiện hơn - Năng suất hơn</h3>
             <div class="container">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Để lại thông tin của bạn</button>
+              <button type="button" class="btn btn-primary"><a href="#contact" class="text-white">Để lại thông tin của bạn</a></button>
             </div>
           </div>
           <div class="col-xl-4 col-lg-3 mx-auto my-auto">
@@ -104,48 +108,51 @@
         </div>
         <div class="col-lg-4">
           <i class="fas fa-shield-alt features-icon"></i>
-          <span class="features-title">Quản lý các port</span>
+          <span class="features-title">TÍNH NĂNG 3</span>
         </div>
       </div>
       <div class="row mt-4 mb-5">
         <div class="col-lg-4">
           <i class="fas fa-shield-alt features-icon"></i>
-          <span class="features-title">Quản lý các port</span>
+          <span class="features-title">TÍNH NĂNG 4</span>
         </div>
         <div class="col-lg-4">
           <i class="fas fa-arrow-right features-icon"></i>
-          <span class="features-title">Ping đến Server khác</span>
+          <span class="features-title">TÍNH NĂNG 5</span>
         </div>
         <div class="col-lg-4">
-          <i class="fas fa-shield-alt features-icon"></i>
-          <span class="features-title">Quản lý các port</span>
+          <i class="fas fa-headset features-icon"></i>
+          <span class="features-title">HỖ TRỢ 24/7</span>
         </div>
       </div>
     </div>
   </section>
   <hr class="mx-auto">
   <section id="benefit">
-    <div class="container clearfix">
+    <div class="container">
       <div class="row mt-5">
-        <div class="col-xl-4 col-lg-3">
-          <img class="benefit-image" src="img/automation.png" width="150%">
+        <div class="col-lg-5">
+          <img class="benefit-image img-responsive" src="img/automation.png" width="120%">
         </div>
-        <div class="col-xl-4 col-lg-3 text-white">
-          <h1 class="float-right">Lợi ích thực tiễn</h1>
+        <div class="col-lg-6 text-white text-right">
+          <h1>Lợi ích thực tiễn</h1>
         </div>
       </div>
     </div>
   </section>
+
   <hr class="mx-auto">
+
   <section id="theme">
-    <div class="text-center mt-5">
+    <div class="text-center mt-5 mb-5">
       <div class="col-lg-8 col-sm-7 mx-auto">
         <h1 class="font-weight-bold">Giao diện thuận tiện</h1>
         <h5 class="my-5">MONITOR365 sử dụng công nghệ và dùng kinh nghiệm lâu năm để mang lại sự ổn định cho dịch vụ. 
         Đồng thời chúng tôi cung mang tới sự trải nghiệm và thuận tiện đối với khách hàng khi sử dụng dịch vụ.</h5>
       </div>
-      <div class="col-sm-10 mx-auto">
-        <iframe id="youtube" src="https://www.youtube.com/embed/6icSm7MIXlc?autoplay=1&loop=1&mute=1&controls=0"></iframe>
+      <img src="img/uptime_robot.jpg" class="img-responsive mb-3" width="50%">
+      <div class="col-sm-10 mx-auto mt-3">
+        <iframe id="youtube" src="https://www.youtube.com/embed/6icSm7MIXlc?autoplay=1&mute=1&loop=1&playlist=6icSm7MIXlc&controls=0"></iframe>
       </div>
     </div>
   </section>
@@ -153,14 +160,158 @@
   <hr class="mx-auto">
 
   <section id="feedback">
-    <div class="text-center mt-5">
-      <h1 class="font-weight-bold">Khách hàng nói về chúng tôi</h1>
-
+    <div class="container">
+      <div class="text-center mt-5">
+        <h1 class="font-weight-bold">Khách hàng nói về chúng tôi</h1>
+        <div class="owl-carousel mt-5">
+          <div class="mx-auto">
+            <img src="img/customer_avatar/chris-evans-1.jpg" class="rounded-circle w-25 mx-auto">
+            <p class="mt-3"><span class="lead">Chris Evans</span><br><small>Chuỗi thời trang Cap</small></p>
+            <p class="pt-4 px-3 font-italic">"Đối với chúng tôi, việc quản lý và giám sát các máy chủ rất quan trong. Sau một thời gian dùng dịch vụ MONITOR365,
+              chúng tôi thấy rất thích các tiện ích theo dõi và giám sát của các bạn"
+            </p>
+            <p><i class="fab fa-facebook footer-icon"></i><i class="fab fa-twitter footer-icon"></i></p>
+          </div>
+          <div class="mx-auto">
+            <img src="img/customer_avatar/chris-evans-1.jpg" class="rounded-circle w-25 mx-auto">
+            <p class="mt-3"><span class="lead">Chris Evans</span><br><small>Chuỗi thời trang Cap</small></p>
+            <p class="pt-4 px-3 font-italic">"Đối với chúng tôi, việc quản lý và giám sát các máy chủ rất quan trong. Sau một thời gian dùng dịch vụ MONITOR365,
+              chúng tôi thấy rất thích các tiện ích theo dõi và giám sát của các bạn"
+            </p>
+            <p><i class="fab fa-facebook footer-icon"></i><i class="fab fa-twitter footer-icon"></i></p>
+          </div>
+          <div class="mx-auto">
+            <img src="img/customer_avatar/chris-evans-1.jpg" class="rounded-circle w-25 mx-auto">
+            <p class="mt-3"><span class="lead">Chris Evans</span><br><small>Chuỗi thời trang Cap</small></p>
+            <p class="pt-4 px-3 font-italic">"Đối với chúng tôi, việc quản lý và giám sát các máy chủ rất quan trong. Sau một thời gian dùng dịch vụ MONITOR365,
+              chúng tôi thấy rất thích các tiện ích theo dõi và giám sát của các bạn"
+            </p>
+            <p><i class="fab fa-facebook footer-icon"></i><i class="fab fa-twitter footer-icon"></i></p>
+          </div>
+          <div class="mx-auto">
+            <img src="img/customer_avatar/chris-evans-1.jpg" class="rounded-circle w-25 mx-auto">
+            <p class="mt-3"><span class="lead">Chris Evans</span><br><small>Chuỗi thời trang Cap</small></p>
+            <p class="pt-4 px-3 font-italic">"Đối với chúng tôi, việc quản lý và giám sát các máy chủ rất quan trong. Sau một thời gian dùng dịch vụ MONITOR365,
+              chúng tôi thấy rất thích các tiện ích theo dõi và giám sát của các bạn"
+            </p>
+            <p><i class="fab fa-facebook footer-icon"></i><i class="fab fa-twitter footer-icon"></i></p>
+          </div>
+          <div class="mx-auto">
+            <img src="img/customer_avatar/chris-evans-1.jpg" class="rounded-circle w-25 mx-auto">
+            <p class="mt-3"><span class="lead">Chris Evans</span><br><small>Chuỗi thời trang Cap</small></p>
+            <p class="pt-4 px-3 font-italic">"Đối với chúng tôi, việc quản lý và giám sát các máy chủ rất quan trong. Sau một thời gian dùng dịch vụ MONITOR365,
+              chúng tôi thấy rất thích các tiện ích theo dõi và giám sát của các bạn"
+            </p>
+            <p><i class="fab fa-facebook footer-icon"></i><i class="fab fa-twitter footer-icon"></i></p>
+          </div>
+        </div>
+        <script>
+          $(document).ready(function(){
+            $(".owl-carousel").owlCarousel({
+              loop:true,
+              margin:10,
+              responsiveClass:true,
+              responsive:{
+                  0:{
+                      items:1,
+                      nav:true
+                  },
+                  600:{
+                      items:3,
+                      nav:false
+                  },
+                  1000:{
+                      items:3,
+                      nav:true,
+                      loop:false
+                  }
+              },
+              autoplay:true,
+              autoplayTimeout:600,
+              autoplayHoverPause:true
+            });
+          });
+        </script>
+      </div>
     </div>
   </section>
   <hr class="mx-auto">
+  <section id="QA" class="text-center">
+    <div class="container col-md-7 mb-5">
+      <h1 class="text-white mb-5">Câu hỏi thường gặp</h1>
+      <div class="row mb-3">
+        <i class="fas fa-chevron-down mr-2" data-toggle="collapse" data-target="#QA1" style="color: red;"></i>
+        <p class="font-weight-bolder text-white">Các hình thức thanh toán khi sử dụng dịch vụ MONITOR365 là gì?</p>
+        <div id="QA1" class="collapse text-white text-left">
+          MONITOR365 hỗ trợ nhiều hình thức thanh toán để đáp ứng được nhu cầu của nhiều người dùng nhất, 
+          đặc biệt người dùng tại Việt Nam. Chúng tôi hỗ trợ thanh toán online qua các cổng thanh toán NAPAS,
+          chuyển khoản và thanh toán tại văn phòng.
+        </div>
+      </div>
+      <div class="row mb-3">
+        <i class="fas fa-chevron-down mr-2" data-toggle="collapse" data-target="#QA2" style="color: red;"></i>
+        <p class="font-weight-bolder text-white">Hạ tầng của CLOUD365 được đặt ở đâu?</p>
+        <div id="QA2" class="collapse text-white text-left">
+          Hạ tầng của CLOUD365 được đặt tại các Datacenter theo tiêu chuẩn tier 3 với các hệ thống điện dự phòng, 
+          điều hòa làm mát và ổn định về đường truyền. Các Datacenter mà CLOUD365 đặt máy chủ là VNPT, Viettel, FPT.
+        </div>
+      </div>
+      <div class="row mb-3">
+        <i class="fas fa-chevron-down mr-2" data-toggle="collapse" data-target="#QA3" style="color: red;"></i>
+        <p class="font-weight-bolder text-white">Người dùng MONITOR365 được hỗ trợ gì khi sử dụng dịch vụ?</p>
+        <div id="QA3" class="collapse text-white text-left">
+          CLOUD365 tập trung vào chất lượng để phục vụ khách hàng và cam kết hỗ trợ khách hàng trọn đời trong quá trình 
+          sử dụng sản phẩm của chúng tôi. Ngoài ra nhân viên tư vấn và nhân viên hỗ trợ khách hàng qua nhiều hình thức như: 
+          Điện thoại, chat, email, ticket .
+        </div>
+      </div>
+      <div class="row mb-3">
+        <i class="fas fa-chevron-down mr-2" data-toggle="collapse" data-target="#QA4" style="color: red;"></i>
+        <p class="font-weight-bolder text-white">Tôi không muốn dùng portal của CLOUD365 thì sử dụng dịch vụ như thế nào?</p>
+        <div id="QA4" class="collapse text-white text-left">
+          Nếu vì lý do nào đó mà bạn không thể sử dụng portal của CLOUD365 để thao tác và vận hành dịch vụ,
+           hãy liên hệ với bộ phận hỗ trợ để được hỗ trợ. Chúng tôi phục vụ khách hàng 24/7 kể cả ngày lễ.
+        </div>
+      </div>
+      <div class="row mb-3">
+        <i class="fas fa-chevron-down mr-2" data-toggle="collapse" data-target="#QA5" style="color: red;"></i>
+        <p class="font-weight-bolder text-white">CLOUD365 còn cung cấp các dịch vụ khác hay không?</p>
+        <div id="QA5" class="collapse text-white text-left">
+          Chúng tôi cung cấp sản phẩm tới người dùng cuối theo như trang chủ, ngoài ra chúng tôi còn cung cấp
+           thêm các dịch vụ tư vấn giải pháp, triển khai các sản phẩm theo hình thức cloud như: Storage, Logging, Loadbalancer ...
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="hotline">
+    <div class="fluid-container bg-danger text-white text-center mb-0 p-3">
+      <h2>Hotline 24/7: (1900) 1080</h2>
+    </div>
+  </section>
+  <section id="contact" class="mt-5">
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-lg-3 ml-5">
+          <h2 class="border-right pr-5">Để lại thông tin của bạn, chúng tôi sẽ chủ động liên hệ cho bạn</h2>
+        </div>
+        <div class="col-lg-7 pl-5">
+          <form action="#">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" placeholder="Enter email" id="email">
+            </div>
+            <div class="form-group">
+              <label for="pwd">Phone Number</label>
+              <input type="password" class="form-control" placeholder="Enter Phone" id="phone">
+            </div>
+            <button type="submit" class="btn btn-danger">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- Footer -->
-  <footer id="last-footer" class="mt-6">
+  <footer id="last-footer">
     <div class="overlay">
       <video autoplay muted loop>
         <source src="video/Network1.mp4" type="video/mp4">
@@ -247,7 +398,7 @@
       </div>
       <div class="row">
         <div class="col-md-12 mt-5">
-          <p class="mb-0">
+          <p class="mb-3">
             &copy; 2020 <span class="font-weight-bold">CLOUD365. </span>All Rights Reserved
         </div>
       </div>
