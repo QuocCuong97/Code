@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Bảng giá {% block title %}{% endblock %}</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+      <a href="#" rel="home"><img class="responsive-img" src="{% static 'img/logo.png' %}" alt="NhanHoa" width="60%"></a>
+    </div>
+  </nav>
+  <!-- Masthead -->
+  <header class="masthead text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">Bảng giá Cloud</h1>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+          <form>
+            <div class="form-row">
+              <div class="col-12 col-md-10 mb-2 mx-auto">
+                <input type="email" class="form-control form-control-lg mx-auto" placeholder="Nhập nội dung muốn tìm kiếm">
+              </div>
+              <!-- <div class="col-12 col-md-3">
+                <button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>
+              </div> -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
+  <nav class="navbar navbar-expand-sm bg-primary justify-content-center">
+    <ul class="navbar-nav mb-1" id="nav">
+      <li class="nav-item ml-4 mr-4">
+        <a class="nav-link text-white font-weight-bold" href="google.com">Domain</a>
+      </li>
+      <li class="nav-item ml-4 mr-4">
+        <a class="nav-link text-white font-weight-bold" href="#">VPS</a>
+      </li>
+      <li class="nav-item ml-4 mr-4">
+        <a class="nav-link text-white font-weight-bold" href="#">Hosting</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="clearfix" id="left-bar">
+    <div class="btn-group-vertical float-sm-left ">
+      <button type="button" class="btn btn-primary btn-sm">
+        <a href="#">
+          <i class="fab fa-facebook fa-2x fa-fw text-white"></i>
+        </a>
+      </button>
+      <button type="button" class="btn btn-primary btn-sm">
+        <a href="#">
+          <i class="fab fa-twitter-square fa-2x fa-fw text-white"></i>
+        </a>
+      </button>
+      <button type="button" class="btn btn-primary btn-sm">
+        <a href="#">
+          <i class="fab fa-instagram fa-2x fa-fw text-white"></i>
+        </a>
+      </button>
+    </div>
+  </div>
+  <div class="clearfix" id="bell">
+    <div class="float-sm-left">
+      <button id="button-bell" type="button" class="btn btn-light btn-lg rounded-circle">
+        <a href="#">
+          <i class="fas fa-bell text-danger"></i>
+        </a>
+      </button>
+    </div>
+  </div>
+  {% block content %}
+  {% endblock %}
+
+  <div class="container-fluid bg-primary">
+    <div class="row">
+      <div class="container p-3">
+        <div class="col-lg-6 h-100 text-center text-lg-left">
+          <ul class="list-inline mb-2">
+            <li class="list-inline-item">
+              <a href="#" class="text-white">About</a>
+            </li>
+            <li class="list-inline-item text-lg-left text-white">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="#" class="text-white">Contact</a>
+            </li>
+            <li class="list-inline-item text-lg-left">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="#" class="text-white">Terms of Use</a>
+            </li>
+            <li class="list-inline-item text-white">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="#" class="text-white">Privacy Policy</a>
+            </li>
+          </ul>
+          <p class="mb-4 mb-lg-0 text-white">&copy; NhanHoa 2020. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
