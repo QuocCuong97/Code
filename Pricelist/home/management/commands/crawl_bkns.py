@@ -1,8 +1,10 @@
-import requests
 import os
-from django.core.management.base import BaseCommand, CommandError
+
+import requests
 from bs4 import BeautifulSoup
-from home.models import Domain
+from django.core.management.base import BaseCommand, CommandError
+
+from home.models import Domain, Vendor
 
 homepage = "https://www.bkns.vn/"
 urls = "https://www.bkns.vn/ten-mien/bang-gia-ten-mien.html"
@@ -106,7 +108,9 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         if kwargs['vn']:
             lst_vn = get_vn()
-            vn = Domain.objects.create('vn', lst_vn[0], lst_vn[1])
+            print(lst_vn)
+            vendor_test = Vendor.objects.all().first()
+            vn = Domain.objects.create(vendor=vendor_test, domain_type='vn', origin_price=lst_vn[0], sale_price=lst_vn[1])
         elif kwargs['comvn']:
             print(get_comvn())
         elif kwargs['com']:
@@ -119,8 +123,3 @@ class Command(BaseCommand):
             print(get_info())
         else:
             print("Invalid options! Please type '-h' for help")
-
-
-
-
-        

@@ -1,0 +1,9 @@
+beautifulsoup4==4.8.2
+Django==3.0.2
+get==2019.4.13
+html5lib==1.0.1
+ipython==7.11.1
+ipython-genutils==0.2.0
+pylint==2.4.4
+request==2019.4.13
+requests==2.22.0

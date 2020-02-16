@@ -3,7 +3,7 @@ from .models import Domain, Vendor
 # Register your models here.
 
 class VendorAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'homepage']
+    # list_display = ['id', 'name', 'homepage']
     list_filter = ['name']
     search_fields = ['name']
     fieldsets = [
@@ -12,10 +12,11 @@ class VendorAdmin(admin.ModelAdmin):
     ]
 
 class DomainAdmin(admin.ModelAdmin):
-    list_display = ['domain_type', 'origin_price', 'sale_price']
+    # list_display = ['vendor', 'domain_type', 'origin_price', 'sale_price']
     list_filter = ['domain_type']
     search_fields = ['domain_type']
     fieldsets = [
+        ('Nha cung cap', {'fields': ['vendor']}),
         ('Loại tên miền', {'fields': ['domain_type']}),
         ('Giá gốc', {'fields': ['origin_price']}),
         ('Giá khuyến mãi', {'fields': ['sale_price']}),

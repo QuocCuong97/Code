@@ -6,6 +6,9 @@ class Vendor(models.Model):
     name = models.CharField(max_length=10, unique=True)
     homepage = models.TextField()
 
+    def __str__(self):
+        return self.name
+
 class Domain(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     domain_type_choices = [
@@ -23,3 +26,5 @@ class Domain(models.Model):
     )
     origin_price = models.CharField(max_length=20, default="0")
     sale_price = models.CharField(max_length=20, default="0")
+    def __str__(self):
+        return self.vendor.name + ' ' + self.domain_type
