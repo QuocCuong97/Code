@@ -8,11 +8,10 @@ while read -r line;do
     password[$i]=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
     i=$(($i+1))
 done < $INPUT_FILE
-echo ${username[1]}
-echo 'USER  DOMAIN  PASSWORD' > $INPUT_FILE
+echo 'USER,DOMAIN,PASSWORD' > $INPUT_FILE
 for (( x=1 ; x<i ; x++ ))
 do
     echo -e "${username[$x]},${domain[$x]},${password[$x]}" >> $INPUT_FILE
-    # sudo prosodyctl register ${username[$x]} ${domain[$x]} ${password[$x]}
+    sudo prosodyctl register ${username[$x]} ${domain[$x]} ${password[$x]}
 done
 echo "Đã tạo $(($i-1)) tài khoản"
