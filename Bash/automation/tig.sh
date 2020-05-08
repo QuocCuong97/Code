@@ -15,12 +15,15 @@ check_os(){
 }
 
 install_influxdb_centos(){
-    yum install influxdb -y
+    yum install influxdb curl -y
     systemctl start influxdb
     systemctl enable influxdb
     firewall-cmd --permanent --add-port=8086/tcp
     firewall-cmd --permanent --add-port=8088/tcp
     firewall-cmd --reload
+    curl "http://localhost:8086/query" --data-urlencode "q=CREATE DATABASE telegraf"
+    curl "http://localhost:8086/query" --data-urlencode "q=CREATE USER telegraf WITH PASSWORD 'telegraf'"
+    curl "http://localhost:8086/query" --data-urlencode "q=GRANT ALL ON 'telegraf' TO 'telegraf'"
 }
 
 install_telegraf_centos(){
@@ -30,12 +33,6 @@ install_telegraf_centos(){
     systemctl start telegraf
     systemctl enable telegraf
     cp /etc/telegraf/telegraf.conf /etc/telegraf/telegraf.conf.bak
-influx <<EOF
-create database telegraf
-create user telegraf with password 'telegraf'
-grant all on "telegraf" to "telegraf"
-exit
-EOF
 }
 
 install_grafana_centos(){
@@ -50,22 +47,20 @@ install_grafana_centos(){
 }
 
 install_influxdb_ubuntu(){
-    sudo apt install influxdb -y
+    sudo apt install influxdb curl -y
     sudo systemctl start influxdb
     sudo systemctl enable influxdb
     sudo ufw allow 8086/tcp
-sudo influx <<EOF
-create database telegraf
-create user telegraf with password 'telegraf'
-grant all on "telegraf" to "telegraf"
-exit
-EOF
+    curl "http://localhost:8086/query" --data-urlencode "q=CREATE DATABASE telegraf"
+    curl "http://localhost:8086/query" --data-urlencode "q=CREATE USER telegraf WITH PASSWORD 'telegraf'"
+    curl "http://localhost:8086/query" --data-urlencode "q=GRANT ALL ON 'telegraf' TO 'telegraf'"
 }
 
 install_telegraf_ubuntu(){
-    sudo wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
-    sudo source /etc/lsb-release
-    sudo echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | tee /etc/apt/sources.list.d/influxdb.list
+    sudo apt-get install gnupg -y
+    wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+    source /etc/lsb-release
+    echo -e "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | tee /etc/apt/sources.list.d/influxdb.list
     sudo apt update -y
     sudo apt install telegraf -y
     sudo systemctl start telegraf
@@ -74,9 +69,12 @@ install_telegraf_ubuntu(){
 }
 
 install_grafana_ubuntu(){
-    sudo apt-get install -y adduser libfontconfig1
-    sudo wget https://dl.grafana.com/oss/release/grafana_6.7.3_amd64.deb
-    sudo dpkg -i grafana_6.7.3_amd64.deb
+    sudo apt-get install -y apt-transport-https
+    sudo apt-get install -y software-properties-common wget
+    wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+    sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
+    sudo apt-get update -y
+    sudo apt-get install grafana
     sudo systemctl start grafana-server
     sudo systemctl enable grafana-server
     sudo ufw allow 3000/tcp
@@ -133,8 +131,9 @@ main(){
     printf "********************** 2. Install Telegraf (Agent) **********************\n"
     printf "********************** q. Quit                     **********************\n"
     read -p "Type your answer :" answer
-    os=check_os
-    if [[ "$os" -eq "CentOS" ]]
+    os=$(check_os)
+    echo "$os"
+    if [[ $os == "CentOS" ]]
     then
         if [[ "$answer" -eq '1' ]]
         then
@@ -199,7 +198,7 @@ main(){
             printf "Invalid option!"
             exit
         fi
-    elif [[ "$os" -eq "Ubuntu" ]]
+    elif [[ $os == "Ubuntu" ]]
     then    
         if [[ "$answer" -eq '1' ]]
         then
@@ -224,6 +223,7 @@ main(){
             clear
             printf "=========================================================================\n"
             printf "Install successfully , enjoy TIG! \n"
+            printf "Database Created : telegraf [user: telegraf - passwd: telegraf]\n"
             printf "=========================================================================\n"
             sleep 5
 
@@ -260,7 +260,6 @@ main(){
             exit
         else
             clear
-            
             exit
             echo -e '\nInvalid option!\n'
         fi
@@ -271,3 +270,4 @@ main(){
     fi
 }
 main
+
