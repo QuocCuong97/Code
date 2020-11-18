@@ -65,7 +65,7 @@ function main {
         Add-Content -Path "agent.yaml" -Value "access_key: $ACCESS_KEY`napi_url: $API_URL`nmachine_id: $MACHINE_ID`nsecret_key: $SECRET_KEY"
         .\nssm install BackupAgent "C:\Windows\BackupAgent\bizfly.exe"
         .\nssm set BackupAgent Application "C:\Windows\BackupAgent\bizfly.exe"
-        .\nssm set BackupAgent AppParameters "agent --config=agent.yaml"
+        .\nssm set BackupAgent AppParameters "agent --config=C:\Windows\BackupAgent\agent.yaml"
         .\nssm set BackupAgent AppThrottle 0
         .\nssm start BackupAgent
     }
