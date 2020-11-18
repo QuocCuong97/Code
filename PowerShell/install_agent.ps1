@@ -83,3 +83,11 @@ if (testAdministrator){
 
 #Usage
 #powershell -ExecutionPolicy Bypass -File test_pws.ps1 -ACCESS_KEY VGSG1NGLDALWHS9WKHQP -API_URL https://dev.bizflycloud.vn/api/cloud-backup -MACHINE_ID 8d8d2df2-3655-4315-9651-6751a81c94db -SECRET_KEY 05009fc456e1450d54225c8b4a599c581dee0d9d8ebe2aa6b6a55aee706387d5
+
+# OR
+# curl -so agent.ps1 --url https://raw.githubusercontent.com/QuocCuong97/Code/master/PowerShell/install_agent.ps1 && ^
+# powershell -ExecutionPolicy Bypass -File agent.ps1 ^
+# -ACCESS_KEY VGSG1NGLDALWHS9WKHQP ^
+# -API_URL https://dev.bizflycloud.vn/api/cloud-backup ^
+# -MACHINE_ID 8d8d2df2-3655-4315-9651-6751a81c94db ^
+# -SECRET_KEY 05009fc456e1450d54225c8b4a599c581dee0d9d8ebe2aa6b6a55aee706387d5

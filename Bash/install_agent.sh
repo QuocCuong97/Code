@@ -107,3 +107,10 @@ run_agent_with_systemd ACCESS_KEY API_URL MACHINE_ID SECRET_KEY
 # MACHINE_ID=4a10ed55-812e-429b-a889-877ecae7088d \
 # SECRET_KEY=66c1e87000944fd38eaa14f88bbcb310e5888c5fa58d44bba18ca2a2af9cd3a2 \
 # bash backup-agent.sh
+
+# OR
+# ACCESS_KEY=OLIQSJ5EQKTRVB01HXJ0 \
+# API_URL=https://dev.bizflycloud.vn/api/cloud-backup \
+# MACHINE_ID=4a10ed55-812e-429b-a889-877ecae7088d \
+# SECRET_KEY=791bc1fac71cef7acb77a4cb306352a5266ffe5f0749c8525d0cffd36c6c4207 \
+# bash -c "$(curl -sSL https://raw.githubusercontent.com/QuocCuong97/Code/master/Bash/install_agent.sh)"
