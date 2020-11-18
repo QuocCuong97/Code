@@ -47,7 +47,7 @@ function main {
     function downloadAgent {
         $download_url = getDownloadURL
         Invoke-WebRequest -Method Get -UseBasicParsing -Uri $download_url -OutFile "bizfly-backup.zip"
-        Expand-Archive -LiteralPath 'bizfly-backup.zip' -Force -DestinationPath 'C:\Windows\BackupAgent'
+        Expand-Archive -LiteralPath 'bizfly-backup.zip' -Force -DestinationPath 'C:\Program Files\BackupAgent'
         Remove-Item 'bizfly-backup.zip'
     }
     
@@ -57,15 +57,15 @@ function main {
         Invoke-WebRequest -Method Get -UseBasicParsing -Uri $download_url -OutFile "nssm.zip"
         Expand-Archive -LiteralPath 'nssm.zip' -Force -DestinationPath '.'
         if ($arch -eq "64bit"){
-            Copy-Item -Path ".\nssm-2.24\win64\nssm.exe" "C:\Windows\BackupAgent"
+            Copy-Item -Path ".\nssm-2.24\win64\nssm.exe" "C:\Program Files\BackupAgent"
         }else {
-            Copy-Item -Path ".\nssm-2.24\win32\nssm.exe" "C:\Windows\BackupAgent"
+            Copy-Item -Path ".\nssm-2.24\win32\nssm.exe" "C:\Program Files\BackupAgent"
         }
-        Set-Location -Path 'C:\Windows\BackupAgent'
+        Set-Location -Path 'C:\Program Files\BackupAgent'
         Add-Content -Path "agent.yaml" -Value "access_key: $ACCESS_KEY`napi_url: $API_URL`nmachine_id: $MACHINE_ID`nsecret_key: $SECRET_KEY"
-        .\nssm install BackupAgent "C:\Windows\BackupAgent\bizfly.exe"
-        .\nssm set BackupAgent Application "C:\Windows\BackupAgent\bizfly.exe"
-        .\nssm set BackupAgent AppParameters "agent --config=C:\Windows\BackupAgent\agent.yaml"
+        .\nssm install BackupAgent "C:\Program Files\BackupAgent\bizfly.exe"
+        .\nssm set BackupAgent Application "C:\Program Files\BackupAgent\bizfly.exe"
+        .\nssm set BackupAgent AppParameters "agent --config=C:\Program Files\BackupAgent\agent.yaml"
         .\nssm set BackupAgent AppThrottle 0
         .\nssm start BackupAgent
     }
