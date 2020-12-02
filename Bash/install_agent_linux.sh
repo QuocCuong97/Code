@@ -4,7 +4,7 @@
 
 check_distribution(){
     . /etc/os-release
-    case "$ID" in
+    case $ID in
         ubuntu | debian | kali)
             sudo apt-get update -y
             sudo apt-get install -y jq
