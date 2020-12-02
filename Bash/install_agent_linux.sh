@@ -7,12 +7,15 @@ check_distribution(){
     # For Ubuntu/Debian
     if [[ $distribution_raw == *debian* ]] ; then
         sudo apt-get update -y
-        sudo apt-get install -y jq curl
+        sudo apt-get install -y jq
         echo "support"
     # For CentOS/RHEL 6,7,8
-    elif [[ $distribution_raw == *rhel* || -f "/etc/redhat-release" ]] ; then                       
-        yum install -y jq curl
+    elif [[ $distribution_raw == *rhel* ]] || [[ -f "/etc/redhat-release" ]]  ; then
+        yum install -y jq
         echo "support"
+    elif [[ $distribution_raw == *suse* ]] ; then
+        zypper up -y
+        zypper install jq -y
     else
         echo "not support"
     fi
@@ -35,8 +38,8 @@ get_lastest_download_url(){
         echo "not support"
     else
         i=0
-        while [ $i -lt $length ]
-        do  
+        while [ "$i" -lt "$length" ]
+        do
             download_url_raw=$(echo $lastest_version | jq -r .[$i].browser_download_url)
             if [[ $download_url_raw == *$filename* ]]; then
                 download_url=$download_url_raw
@@ -52,64 +55,57 @@ download_agent(){
     if [[ $(check_distribution) == "not support" ]]; then
         echo "Not support!"
     else
-        if [[ $(get_lastest_download_url) == "not support" ]]; then
+        if [[ "$(get_lastest_download_url)" == "not support" ]]; then
             echo "Not support!"
         else
-            curl -Ls $(get_lastest_download_url) --output "bizfly-backup.tar.gz"
+            curl -Ls "$(get_lastest_download_url)" --output "bizfly-backup.tar.gz"
             tar -xzf bizfly-backup.tar.gz
-            mv bizfly /usr/bin
+            mv bizfly-backup /usr/bin
             rm -f bizfly-backup.tar.gz
         fi
     fi
 }
 
 run_agent_with_systemd(){
-    cat <<EOF > /etc/agent.yaml
+mkdir /etc/bizfly-backup/
+    cat <<EOF > /etc/bizfly-backup/agent.yaml
 access_key: $ACCESS_KEY
 api_url: $API_URL
 machine_id: $MACHINE_ID
 secret_key: $SECRET_KEY
 EOF
-    cat <<EOF > /etc/systemd/system/backup-agent.service
+    cat <<EOF > /etc/systemd/system/bizfly-backup.service
 [Unit]
 Description=Backup Agent Service
-
 [Service]
 Type=simple
-ExecStart=/usr/bin/bizfly agent --config=/etc/agent.yaml
-
+ExecStart=/usr/bin/bizfly-backup agent --config=/etc/bizfly-backup/agent.yaml
 [Install]
 WantedBy=multi-user.target
 EOF
-    sudo chmod 644 /etc/systemd/system/backup-agent.service
-    systemctl enable backup-agent
-    systemctl start backup-agent
-    systemctl status backup-agent
+    sudo chmod 644 /etc/systemd/system/bizfly-backup.service
+    systemctl enable bizfly-backup
+    systemctl start bizfly-backup
+    systemctl status bizfly-backup
 }
 
 clear
 printf "=========================================================================\n"
-printf "******************Backup Agent Installation - VCCloud********************\n"
+printf "***********BizFly Backup Agent Installation - BizFly Cloud********************\n"
 printf "=========================================================================\n"
-printf "First Step: Download Agent\n"
+printf "First Step: Download BizFly Backup Agent\n"
 printf "====================================\n"
 download_agent
 
 clear
 printf "=========================================================================\n"
-printf "Second Step: Run Agent\n"
+printf "Second Step: Run BizFly Backup Agent\n"
 printf "=======================================\n"
 run_agent_with_systemd ACCESS_KEY API_URL MACHINE_ID SECRET_KEY
 
-### Usage
-# ACCESS_KEY=OLIQSJ5EQKTRVB01HXJ0 \
-# API_URL=https://dev.bizflycloud.vn/api/cloud-backup \
-# MACHINE_ID=4a10ed55-812e-429b-a889-877ecae7088d \
-# SECRET_KEY=791bc1fac71cef7acb77a4cb306352a5266ffe5f0749c8525d0cffd36c6c4207 \
-# bash -c "$(curl -sSL https://raw.githubusercontent.com/QuocCuong97/Code/master/Bash/install_agent_linux.sh)"
 
 # START SERVICE:
-# systemctl start backup-agent
+# systemctl start bizfly-backup
 
 # STOP SERVICE:
-# systemctl stop backup-agent
+# systemctl stop bizfly-backup
