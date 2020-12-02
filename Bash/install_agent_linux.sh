@@ -15,8 +15,8 @@ check_distribution(){
             echo "support"
             ;;
         *suse*)
-            yum install -y jq
-            echo "support $ID"
+            zypper install -y jq
+            echo "support"
             ;;
         *)
             echo "not support"
