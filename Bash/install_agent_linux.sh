@@ -94,16 +94,16 @@ EOF
 
 clear
 printf "=========================================================================\n"
-printf "***********BizFly Backup Agent Installation - BizFly Cloud********************\n"
+printf "********** BizFly Backup Agent Installation - BizFly Cloud **************\n"
 printf "=========================================================================\n"
 printf "First Step: Download BizFly Backup Agent\n"
-printf "====================================\n"
+printf "========================================\n"
 download_agent
 
 clear
 printf "=========================================================================\n"
 printf "Second Step: Run BizFly Backup Agent\n"
-printf "=======================================\n"
+printf "====================================\n"
 run_agent_with_systemd ACCESS_KEY API_URL MACHINE_ID SECRET_KEY
 
 
