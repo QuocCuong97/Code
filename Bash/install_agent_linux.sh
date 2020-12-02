@@ -3,22 +3,25 @@
 # Script install Agent for Backup Service on Linux
 
 check_distribution(){
-    distribution_raw=$(cat /etc/os-release | grep ID_LIKE)
-    # For Ubuntu/Debian
-    if [[ $distribution_raw == *debian* ]] ; then
-        sudo apt-get update -y
-        sudo apt-get install -y jq
-        echo "support"
-    # For CentOS/RHEL 6,7,8
-    elif [[ $distribution_raw == *rhel* ]] || [[ -f "/etc/redhat-release" ]]  ; then
-        yum install -y jq
-        echo "support"
-    elif [[ $distribution_raw == *suse* ]] ; then
-        zypper up -y
-        zypper install jq -y
-    else
-        echo "not support"
-    fi
+    . /etc/os-release
+    case "$ID" in
+        ubuntu | debian | kali)
+            sudo apt-get update -y
+            sudo apt-get install -y jq
+            echo "support"
+            ;;
+        rhel | centos)
+            yum install -y jq
+            echo "support"
+            ;;
+        *suse*)
+            yum install -y jq
+            echo "support $ID"
+            ;;
+        *)
+            echo "not support"
+            ;;
+    esac
 }
 
 get_lastest_download_url(){
