@@ -19,12 +19,12 @@ func main() {
 		}
 		fmt.Println(os_name)
 	case "darwin":
-        out, err := exec.Command("sw_vers -productName").Output()
+        out, err := exec.Command("bash", "-c", "sw_vers -productName").Output()
 		os_name := string(out)
 		if err != nil {
 			fmt.Println(err)
         }
-        output, errors := exec.Command("sw_vers -productVersion").Output()
+        output, errors := exec.Command("bash", "-c", "sw_vers -productVersion").Output()
 		os_version := string(output)
 		if err != nil {
 			fmt.Println(errors)
