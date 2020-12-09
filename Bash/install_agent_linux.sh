@@ -109,9 +109,9 @@ full_install(){
     printf "Second Step: Run BizFly Backup Agent\n"
     printf "====================================\n"
     run_agent_with_systemd ACCESS_KEY API_URL MACHINE_ID SECRET_KEY
-    printf "====================================\n"
-    printf "Your agent is successfully installed !"
-    printf "====================================\n"
+    printf "======================================\n"
+    printf "Your agent is successfully installed !\n"
+    printf "======================================\n"
 }
 
 upgrade(){
@@ -155,15 +155,15 @@ main(){
             read -r -p "Do you want to start the upgrade? [Y/n]" input
             case $input in
                 [yY][eE][sS]|[yY])
-            upgrade
-            ;;
+                    upgrade
+                    ;;
                 [nN][oO]|[nN])
-            exit
+                    exit
                     ;;
                 *)
-            echo "Invalid input..."
-            exit
-            ;;
+                    echo "Invalid input..."
+                    exit
+                    ;;
             esac
         fi
     else

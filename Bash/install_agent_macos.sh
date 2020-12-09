@@ -11,12 +11,12 @@ get_latest_release() {
 download_agent() {
     download_url=$(get_latest_release)
     curl -fsSL $download_url -o "bizfly-backup.tar.gz"
-    mkdir ~/.backup-agent
-    tar -xzf bizfly-backup.tar.gz -C ~/.backup-agent/
+    sudo mkdir ~/.backup-agent
+    sudo tar -xzf bizfly-backup.tar.gz -C ~/.backup-agent/
 }
 
 run_agent_with_launchd(){
-    cat <<EOF > /Library/LaunchDaemons/bizfly.backup.agent.plist
+    sudo cat <<EOF > /Library/LaunchDaemons/bizfly.backup.agent.plist
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -44,15 +44,15 @@ run_agent_with_launchd(){
 </plist>
 EOF
 
-    cat <<EOF > ~/.backup-agent/agent.yaml
+    sudo cat <<EOF > ~/.backup-agent/agent.yaml
 access_key: $ACCESS_KEY
 api_url: $API_URL
 machine_id: $MACHINE_ID
 secret_key: $SECRET_KEY
 EOF
 
-    launchctl load -w /Library/LaunchDaemons/bizfly.backup.agent.plist
-    launchctl list backup-agent
+    sudo launchctl load -w /Library/LaunchDaemons/bizfly.backup.agent.plist
+    sudo launchctl list backup-agent
 }
 
 clear
