@@ -151,18 +151,18 @@ main(){
         else
             clear
             printf "=========================================================================\n"
-            printf "A new version of bizfly-backup ($lastest_version) is available!"
+            printf "A new version of bizfly-backup ($lastest_version) is available!\n"
             read -r -p "Do you want to start the upgrade? [Y/n]" input
             case $input in
                 [yY][eE][sS]|[yY])
             upgrade
             ;;
                 [nN][oO]|[nN])
-            break
+            exit
                     ;;
                 *)
             echo "Invalid input..."
-            break
+            exit
             ;;
             esac
         fi
