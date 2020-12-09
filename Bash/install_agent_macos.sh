@@ -51,8 +51,8 @@ machine_id: $MACHINE_ID
 secret_key: $SECRET_KEY
 EOF
 
-    launchctl load -w /Library/LaunchDaemons/bizfly.backup.plist
-    launchctl list bizfly-backup
+    sudo launchctl load -w /Library/LaunchDaemons/bizfly.backup.plist
+    sudo launchctl list bizfly-backup
 }
 
 clear
