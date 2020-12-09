@@ -145,9 +145,9 @@ main(){
             printf "Run BizFly Backup Agent\n"
             printf "=======================\n"
             run_agent_with_systemd ACCESS_KEY API_URL MACHINE_ID SECRET_KEY
-            printf "====================================\n"
-            printf "Your agent is successfully installed !"
-            printf "====================================\n"
+            printf "=====================================\n"
+            printf "Your agent is successfully installed!\n"
+            printf "=====================================\n"
         else
             clear
             printf "=========================================================================\n"
