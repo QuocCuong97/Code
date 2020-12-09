@@ -119,8 +119,8 @@ upgrade(){
     printf "=========================================================================\n"
     printf "********** BizFly Backup Agent Installation - BizFly Cloud **************\n"
     printf "=========================================================================\n"
-    printf "First Step: Update BizFly Backup Agent\n"
-    printf "========================================\n"
+    printf "First Step: Upgrading BizFly Backup Agent\n"
+    printf "=========================================\n"
     systemctl stop bizfly-backup
     rm -f /tmp/bizfly-backup.sock /usr/bin/bizfly-backup
     download_agent
@@ -131,7 +131,7 @@ upgrade(){
     printf "====================================\n"
     run_agent_with_systemd ACCESS_KEY API_URL MACHINE_ID SECRET_KEY
     printf "====================================\n"
-    printf "Your agent is successfully updated !"
+    printf "Your agent is successfully updated !\n"
     printf "====================================\n"
 }
 
