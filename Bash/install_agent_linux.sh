@@ -5,15 +5,18 @@
 check_distribution(){
     . /etc/os-release
     case $ID in
+    # For Ubuntu/Debian/Kali
         ubuntu | debian | kali)
             sudo apt-get update -y
             sudo apt-get install -y jq
             echo "support"
             ;;
+    # For CentOS/RHEL 7,8
         rhel | centos)
             yum install -y jq
             echo "support"
             ;;
+    # For OpenSuse
         *suse*)
             zypper install -y jq
             echo "support"
@@ -88,24 +91,87 @@ WantedBy=multi-user.target
 EOF
     sudo chmod 644 /etc/systemd/system/bizfly-backup.service
     systemctl enable bizfly-backup
-    systemctl start bizfly-backup
+    systemctl restart bizfly-backup
     systemctl status bizfly-backup
 }
 
-clear
-printf "=========================================================================\n"
-printf "********** BizFly Backup Agent Installation - BizFly Cloud **************\n"
-printf "=========================================================================\n"
-printf "First Step: Download BizFly Backup Agent\n"
-printf "========================================\n"
-download_agent
+full_install(){
+    clear
+    printf "=========================================================================\n"
+    printf "********** BizFly Backup Agent Installation - BizFly Cloud **************\n"
+    printf "=========================================================================\n"
+    printf "First Step: Download BizFly Backup Agent\n"
+    printf "========================================\n"
+    download_agent
 
-clear
-printf "=========================================================================\n"
-printf "Second Step: Run BizFly Backup Agent\n"
-printf "====================================\n"
-run_agent_with_systemd ACCESS_KEY API_URL MACHINE_ID SECRET_KEY
+    clear
+    printf "=========================================================================\n"
+    printf "Second Step: Run BizFly Backup Agent\n"
+    printf "====================================\n"
+    run_agent_with_systemd ACCESS_KEY API_URL MACHINE_ID SECRET_KEY
+    printf "====================================\n"
+    printf "Your agent is successfully installed !"
+    printf "====================================\n"
+}
 
+upgrade(){
+    clear
+    printf "=========================================================================\n"
+    printf "********** BizFly Backup Agent Installation - BizFly Cloud **************\n"
+    printf "=========================================================================\n"
+    printf "First Step: Update BizFly Backup Agent\n"
+    printf "========================================\n"
+    systemctl stop bizfly-backup
+    rm -f /tmp/bizfly-backup.sock /usr/bin/bizfly-backup
+    download_agent
+
+    clear
+    printf "=========================================================================\n"
+    printf "Second Step: Run BizFly Backup Agent\n"
+    printf "====================================\n"
+    run_agent_with_systemd ACCESS_KEY API_URL MACHINE_ID SECRET_KEY
+    printf "====================================\n"
+    printf "Your agent is successfully updated !"
+    printf "====================================\n"
+}
+
+main(){
+    if [[ -x $(command -v bizfly-backup) ]] ; then
+        installed_version=$(bizfly-backup version | grep Version | awk '{print $2}' | sed 's/v//g')
+        lastest_version=$(curl -X GET -s https://api.github.com/repos/bizflycloud/bizfly-backup/releases/latest | jq '.tag_name' | sed 's/["v]//g')
+        if [[ "$installed_version" == $lastest_version ]] ; then
+            clear
+            printf "=========================================================================\n"
+            printf "Run BizFly Backup Agent\n"
+            printf "=======================\n"
+            run_agent_with_systemd ACCESS_KEY API_URL MACHINE_ID SECRET_KEY
+            printf "====================================\n"
+            printf "Your agent is successfully installed !"
+            printf "====================================\n"
+        else
+            clear
+            printf "=========================================================================\n"
+            printf "A new version of bizfly-backup ($lastest_version) is available!"
+            read -r -p "Do you want to start the upgrade? [Y/n]" input
+            case $input in
+                [yY][eE][sS]|[yY])
+            upgrade
+            ;;
+                [nN][oO]|[nN])
+            break
+                    ;;
+                *)
+            echo "Invalid input..."
+            break
+            ;;
+            esac
+        fi
+    else
+        full_install
+    fi
+}
+
+main
 
 # START SERVICE:
 # systemctl start bizfly-backup
