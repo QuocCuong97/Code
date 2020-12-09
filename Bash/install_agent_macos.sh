@@ -16,7 +16,7 @@ download_agent() {
 }
 
 run_agent_with_launchd(){
-    sudo cat <<EOF > /Library/LaunchDaemons/bizfly.backup.plist
+    cat <<EOF > /Library/LaunchDaemons/bizfly.backup.plist
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -51,13 +51,13 @@ machine_id: $MACHINE_ID
 secret_key: $SECRET_KEY
 EOF
 
-    sudo launchctl load -w /Library/LaunchDaemons/bizfly.backup.plist
-    sudo launchctl list bizfly-backup
+    launchctl load -w /Library/LaunchDaemons/bizfly.backup.plist
+    launchctl list bizfly-backup
 }
 
 clear
 printf "=========================================================================\n"
-printf "******************Backup Agent Installation - BizFly Cloud********************\n"
+printf "*****************Backup Agent Installation - BizFly Cloud****************\n"
 printf "=========================================================================\n"
 printf "First Step: Download Agent\n"
 printf "====================================\n"
