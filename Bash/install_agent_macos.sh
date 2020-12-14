@@ -12,7 +12,7 @@ download_agent() {
     download_url=$(get_latest_release)
     curl -fsSL $download_url -o "bizfly-backup.tar.gz"
     tar -xzf bizfly-backup.tar.gz
-    mv bizfly-backup /usr/local/bin
+    mv bizfly-backup /bin
     rm -f bizfly-backup.tar.gz
 }
 
@@ -26,7 +26,7 @@ run_agent_with_launchd(){
     <string>bizfly-backup</string>
     <key>ProgramArguments</key>
     <array>
-      <string>/usr/local/bin/bizfly-backup</string>
+      <string>/bin/bizfly-backup</string>
       <string>--config</string>
       <string>/etc/bizfly-backup/agent.yaml</string>
       <string>agent</string>
@@ -86,7 +86,7 @@ upgrade(){
     printf "=========================================\n"
     launchctl stop bizfly-backup
     launchctl unload -w /Library/LaunchDaemons/bizfly.backup.plist
-    rm -Rf /etc/bizfly-backup /usr/local/bin/bizfly-backup /Library/LaunchDaemons/bizfly.backup.plist
+    rm -Rf /etc/bizfly-backup /bin/bizfly-backup /Library/LaunchDaemons/bizfly.backup.plist
     rm -f /tmp/bizfly-backup.sock /tmp/bizfly-backup.stderr /tmp/bizfly-backup.stdout
     download_agent
 
