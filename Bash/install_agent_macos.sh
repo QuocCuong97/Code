@@ -11,7 +11,8 @@ get_latest_release() {
 download_agent() {
     download_url=$(get_latest_release)
     curl -fsSL $download_url -o "bizfly-backup"
-    mv bizfly-backup /bin
+    chmod +x bizfly-backup
+    mv bizfly-backup /bin/
 }
 
 run_agent_with_launchd(){
