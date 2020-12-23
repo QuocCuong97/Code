@@ -4,7 +4,7 @@
 
 get_latest_release() {
     lastest_version=`curl -s "https://api.github.com/repos/bizflycloud/bizfly-backup/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'`
-    download_url="https://github.com/bizflycloud/bizfly-backup/releases/download/$lastest_version/bizfly-backup_darwin_amd64"
+    download_url="https://github.com/bizflycloud/bizfly-backup/releases/download/v0.0.11/bizfly-backup_darwin_amd64"
     echo $download_url
 }
 
