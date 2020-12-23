@@ -15,7 +15,7 @@ download_agent() {
     if [[ ! -d "/usr/share/bizfly-backup/bin" ]]; then
         mkdir -p /usr/share/bizfly-backup/bin
     fi
-    if [[ "$PATH" != *"/usr/share/bizfly-backup/bin"* ]]; then
+    if grep -q $PATH <<< "/usr/share/bizfly-backup/bin"; then
         echo /usr/share/bizfly-backup/bin >> /etc/paths
         export PATH=$PATH:/usr/share/bizfly-backup/bin
     fi
