@@ -13,10 +13,10 @@ download_agent() {
     curl -fsSL $download_url -o "bizfly-backup"
     chmod +x bizfly-backup
     if [[ ! -d "/usr/share/bizfly-backup/bin" ]]; then
-        mkdir /usr/share/bizfly-backup/bin
+        mkdir -p /usr/share/bizfly-backup/bin
     fi
     if [[ "$PATH" != *"/usr/share/bizfly-backup/bin"* ]]; then
-        echo "/usr/share/bizfly-backup/bin'" >> /etc/paths
+        echo /usr/share/bizfly-backup/bin >> /etc/paths
         export PATH=$PATH:/usr/share/bizfly-backup/bin
     fi
     mv bizfly-backup /usr/share/bizfly-backup/bin
