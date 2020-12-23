@@ -3,8 +3,8 @@
 # Script install Agent for Backup Service on MAC OS
 
 get_latest_release() {
-    lastest_version=`curl -s "https://api.github.com/repos/bizflycloud/bizfly-backup/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'`
-    download_url="https://github.com/bizflycloud/bizfly-backup/releases/download/v0.0.11/bizfly-backup_darwin_amd64"
+    lastest_version=$(curl -s "https://api.github.com/repos/bizflycloud/bizfly-backup/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    download_url="https://github.com/bizflycloud/bizfly-backup/releases/download/$lastest_version/bizfly-backup_darwin_amd64"
     echo $download_url
 }
 
@@ -12,13 +12,15 @@ download_agent() {
     download_url=$(get_latest_release)
     curl -fsSL $download_url -o "bizfly-backup"
     chmod +x bizfly-backup
-    if [[ -f "/usr/local/bin" ]]; then
-        rm -f /usr/local/bin
+    if [[ ! -d "/usr/share/bizfly-backup/bin" ]]; then
+        mkdir /usr/share/bizfly-backup/bin
     fi
-    if [[ ! -d "/usr/local/bin" ]]; then
-        mkdir /usr/local/bin
+    if [[ "$PATH" != *"/usr/share/bizfly-backup/bin"* ]]; then
+        touch ~/.bash_profile
+        echo "export PATH='\$PATH:/usr/share/bizfly-backup/bin'" >> ~/.bash_profile
+        source ~/.bash_profile
     fi
-    mv bizfly-backup /usr/local/bin/
+    mv bizfly-backup /usr/share/bizfly-backup/bin
 }
 
 run_agent_with_launchd(){
@@ -31,7 +33,7 @@ run_agent_with_launchd(){
     <string>bizfly-backup</string>
     <key>ProgramArguments</key>
     <array>
-      <string>/usr/local/bin/bizfly-backup</string>
+      <string>/usr/share/bizfly-backup/bin/bizfly-backup</string>
       <string>--config</string>
       <string>/etc/bizfly-backup/agent.yaml</string>
       <string>agent</string>
@@ -43,9 +45,9 @@ run_agent_with_launchd(){
     <key>LaunchOnlyOnce</key>
     <false/>
     <key>StandardOutPath</key>
-    <string>/tmp/bizfly-backup.stdout</string>
+    <string>/var/log/bizfly-backup.log</string>
     <key>StandardErrorPath</key>
-    <string>/tmp/bizfly-backup.stderr</string>
+    <string>/var/log/bizfly-backup.error</string>
   </dict>
 </plist>
 EOF
@@ -91,8 +93,8 @@ upgrade(){
     printf "=========================================\n"
     launchctl stop bizfly-backup
     launchctl unload -w /Library/LaunchDaemons/bizfly.backup.plist
-    rm -Rf /etc/bizfly-backup /usr/local/bin/bizfly-backup /Library/LaunchDaemons/bizfly.backup.plist
-    rm -f /tmp/bizfly-backup.sock /tmp/bizfly-backup.stderr /tmp/bizfly-backup.stdout
+    rm -Rf /etc/bizfly-backup /usr/share/bizfly-backup/bin /Library/LaunchDaemons/bizfly.backup.plist
+    rm -f /tmp/bizfly-backup.sock /var/log/bizfly-backup.error /var/log/bizfly-backup.log
     download_agent
 
     clear
@@ -107,7 +109,7 @@ upgrade(){
 
 main(){
     if [[ -x $(command -v bizfly-backup) ]] ; then
-        installed_version=$(/usr/local/bin/bizfly-backup version | grep Version | awk '{print $2}' | sed 's/v//g')
+        installed_version=$(bizfly-backup version | grep Version | awk '{print $2}' | sed 's/v//g')
         lastest_version=$(curl -s "https://api.github.com/repos/bizflycloud/bizfly-backup/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
         if [[ "v$installed_version" == $lastest_version ]] ; then
             clear
