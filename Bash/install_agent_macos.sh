@@ -12,14 +12,14 @@ download_agent() {
     download_url=$(get_latest_release)
     curl -fsSL $download_url -o "bizfly-backup"
     chmod +x bizfly-backup
-    if [[ ! -d "/usr/share/bizfly-backup/bin" ]]; then
-        mkdir -p /usr/share/bizfly-backup/bin
+    if [[ -f "/usr/local/bin" ]]; then
+        rm -f /usr/local/bin
     fi
-    if grep -q $PATH <<< "/usr/share/bizfly-backup/bin"; then
-        echo /usr/share/bizfly-backup/bin >> /etc/paths
-        export PATH=$PATH:/usr/share/bizfly-backup/bin
+    if [[ ! -d "/usr/local/bin" ]]; then
+        mkdir /usr/local/bin
     fi
-    mv bizfly-backup /usr/share/bizfly-backup/bin
+    export PATH=$PATH:/usr/local/bin
+    mv bizfly-backup /usr/local/bin/
 }
 
 run_agent_with_launchd(){
@@ -32,7 +32,7 @@ run_agent_with_launchd(){
     <string>bizfly-backup</string>
     <key>ProgramArguments</key>
     <array>
-      <string>/usr/share/bizfly-backup/bin/bizfly-backup</string>
+      <string>/usr/local/bin/bizfly-backup</string>
       <string>--config</string>
       <string>/etc/bizfly-backup/agent.yaml</string>
       <string>agent</string>
@@ -44,9 +44,9 @@ run_agent_with_launchd(){
     <key>LaunchOnlyOnce</key>
     <false/>
     <key>StandardOutPath</key>
-    <string>/var/log/bizfly-backup.log</string>
+    <string>/tmp/bizfly-backup.stdout</string>
     <key>StandardErrorPath</key>
-    <string>/var/log/bizfly-backup.error</string>
+    <string>/tmp/bizfly-backup.stderr</string>
   </dict>
 </plist>
 EOF
@@ -92,8 +92,8 @@ upgrade(){
     printf "=========================================\n"
     launchctl stop bizfly-backup
     launchctl unload -w /Library/LaunchDaemons/bizfly.backup.plist
-    rm -Rf /etc/bizfly-backup /usr/share/bizfly-backup/bin /Library/LaunchDaemons/bizfly.backup.plist
-    rm -f /tmp/bizfly-backup.sock /var/log/bizfly-backup.error /var/log/bizfly-backup.log
+    rm -Rf /etc/bizfly-backup /usr/local/bin/bizfly-backup /Library/LaunchDaemons/bizfly.backup.plist
+    rm -f /tmp/bizfly-backup.sock /tmp/bizfly-backup.stderr /tmp/bizfly-backup.stdout
     download_agent
 
     clear
