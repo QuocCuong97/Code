@@ -16,9 +16,8 @@ download_agent() {
         mkdir /usr/share/bizfly-backup/bin
     fi
     if [[ "$PATH" != *"/usr/share/bizfly-backup/bin"* ]]; then
-        touch ~/.bash_profile
-        echo "export PATH='\$PATH:/usr/share/bizfly-backup/bin'" >> ~/.bash_profile
-        source ~/.bash_profile
+        echo "/usr/share/bizfly-backup/bin'" >> /etc/paths
+        export PATH=$PATH:/usr/share/bizfly-backup/bin
     fi
     mv bizfly-backup /usr/share/bizfly-backup/bin
 }
