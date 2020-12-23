@@ -18,7 +18,9 @@ download_agent() {
     if [[ ! -d "/usr/local/bin" ]]; then
         mkdir /usr/local/bin
     fi
-    export PATH=$PATH:/usr/local/bin
+    if [[ ! -f "/etc/paths.d/bizfly-backup" ]]; then
+        echo /usr/local/bin/ > /etc/paths.d/bizfly-backup
+    bash "export PATH=$PATH:/usr/local/bin"
     mv bizfly-backup /usr/local/bin/
 }
 
