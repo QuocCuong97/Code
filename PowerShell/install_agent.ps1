@@ -78,7 +78,7 @@ function runAgentasService {
 function fullInstall {
     Clear-Host
     Set-Location -Path "~\"
-    New-Item -ItemType Directory -Path "\progra~1\BizFlyBackup" -Force
+    New-Item -ItemType Directory -Path "\progra~1\BizFlyBackup" | Out-Null
     Write-Host "=========================================================================`n"
     Write-Host "********** BizFly Backup Agent Installation - BizFly Cloud **************`n"
     Write-Host "=========================================================================`n"
