@@ -30,9 +30,9 @@ function getDownloadURL {
     $responseobj = (ConvertFrom-Json -InputObject $response).assets
     $arch = GetArchitecture
     if ($arch -eq "64bit"){
-        $filename = "bizfly-backup_windows_amd64.zip"
+        $filename = "bizfly-backup_windows_amd64.exe"
     }else {
-        $filename = "bizfly-backup_windows_386.zip"
+        $filename = "bizfly-backup_windows_386.exe"
     }
     for($i = 0; $i -lt $responseobj.length; $i++){
         if ($responseobj[$i].browser_download_url -like "*$filename*"){
@@ -44,9 +44,7 @@ function getDownloadURL {
 
 function downloadAgent {
     $download_url = getDownloadURL
-    Invoke-WebRequest -Method Get -UseBasicParsing -Uri $download_url -OutFile "bizfly-backup.zip"
-    Expand-Archive -LiteralPath 'bizfly-backup.zip' -Force -DestinationPath "\progra~1\BizFlyBackup"
-    Remove-Item 'bizfly-backup.zip'
+    Invoke-WebRequest -Method Get -UseBasicParsing -Uri $download_url -OutFile ( New-Item -Path "\progra~1\BizFlyBackup\bizfly-backup.exe" )
 }
 
 function runAgentasService {
@@ -64,24 +62,23 @@ function runAgentasService {
         }else {
             Copy-Item -Path ".\nssm-2.24\win32\nssm.exe" "\progra~1\BizFlyBackup"
         }
-
         Set-Location -Path "\progra~1\BizFlyBackup"
         Add-Content -Path "agent.yaml" -Value "access_key: $ACCESS_KEY`napi_url: $API_URL`nmachine_id: $MACHINE_ID`nsecret_key: $SECRET_KEY"
         .\nssm install BizFlyBackup "\progra~1\BizFlyBackup\bizfly-backup.exe"
         .\nssm set BizFlyBackup Application "\progra~1\BizFlyBackup\bizfly-backup.exe"
         .\nssm set BizFlyBackup AppParameters "agent --config=\progra~1\BizFlyBackup\agent.yaml"
         .\nssm set BizFlyBackup AppThrottle 0
+        .\nssm set BizFlyBackup AppExit 0 Restart
         .\nssm start BizFlyBackup
-
         Remove-Item "~\nssm.zip"
         Remove-Item "~\nssm-2.24" -Recurse
     }
 }
 
 function fullInstall {
-
     Clear-Host
     Set-Location -Path "~\"
+    New-Item -ItemType Directory -Path "\progra~1\BizFlyBackup" -Force
     Write-Host "=========================================================================`n"
     Write-Host "********** BizFly Backup Agent Installation - BizFly Cloud **************`n"
     Write-Host "=========================================================================`n"
@@ -97,7 +94,6 @@ function fullInstall {
 }
 
 function upgrade {
-
     Clear-Host
     Write-Host "=========================================================================`n"
     Write-Host "********** BizFly Backup Agent Installation - BizFly Cloud **************`n"
@@ -125,7 +121,6 @@ if (checkAdministrator){
         $release_url = "https://api.github.com/repos/bizflycloud/bizfly-backup/releases/latest"
         $response = (Invoke-WebRequest -UseBasicParsing -Uri $release_url)
         $lastest_version = (ConvertFrom-Json -InputObject $response).tag_name
-
         if ("v$current_version" -eq $lastest_version){
             Clear-Host
             Write-Host "=========================================================================`n"
