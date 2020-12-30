@@ -73,6 +73,10 @@ function runAgentasService {
         Remove-Item "~\nssm.zip"
         Remove-Item "~\nssm-2.24" -Recurse
     }
+    if (!($env:PATH -Like "*C:\Program Files\BizFlyBackup*")){
+        [System.Environment]::SetEnvironmentVariable("PATH", $env:PATH + "C:\Program Files\BizFlyBackup", [System.EnvironmentVariableTarget]::User)
+        doskey bizfly-backup.exe bizfly-backup
+    }
 }
 
 function fullInstall {
@@ -117,7 +121,6 @@ function upgrade {
 if (checkAdministrator){
     if ([System.IO.File]::Exists("C:\progra~1\BizFlyBackup\bizfly-backup.exe")){
         $current_version = $((\progra~1\BizFlyBackup\bizfly-backup.exe version | Select-String "Version:")  -split ":  ")[1]
-
         $release_url = "https://api.github.com/repos/bizflycloud/bizfly-backup/releases/latest"
         $response = (Invoke-WebRequest -UseBasicParsing -Uri $release_url)
         $lastest_version = (ConvertFrom-Json -InputObject $response).tag_name
