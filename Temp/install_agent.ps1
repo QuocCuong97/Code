@@ -74,8 +74,8 @@ function runAgentasService {
         Remove-Item "~\nssm-2.24" -Recurse
     }
     if (!($env:PATH -Like "*C:\Program Files\BizFlyBackup*")){
-        [System.Environment]::SetEnvironmentVariable("PATH", $env:PATH + "C:\Program Files\BizFlyBackup", [System.EnvironmentVariableTarget]::User)
-        doskey bizfly-backup.exe bizfly-backup
+        [System.Environment]::SetEnvironmentVariable("PATH", $env:PATH + "C:\Program Files\BizFlyBackup;", [System.EnvironmentVariableTarget]::User)
+        doskey bizfly-backup.exe=bizfly-backup
     }
 }
 
