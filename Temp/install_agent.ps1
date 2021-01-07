@@ -14,9 +14,9 @@ function checkAdministrator{
 
 function getArchitecture {
     if ($([Environment]::Is64BitOperatingSystem)){
-        Write-Output "64bit"
+        Write-Output "x64"
     }else {
-        Write-Output "32bit"
+        Write-Output "x86"
     }
 }
 
@@ -29,7 +29,7 @@ function getDownloadURL {
     $response = (Invoke-WebRequest -UseBasicParsing -Uri $release_url)
     $responseobj = (ConvertFrom-Json -InputObject $response).assets
     $arch = GetArchitecture
-    if ($arch -eq "64bit"){
+    if ($arch -eq "x64"){
         $filename = "bizfly-backup_windows_amd64.exe"
     }else {
         $filename = "bizfly-backup_windows_386.exe"
@@ -50,33 +50,30 @@ function downloadAgent {
 function runAgentasService {
     if ([System.IO.File]::Exists("C:\progra~1\BizFlyBackup\bizfly-backup.exe") -And [System.IO.File]::Exists("C:\progra~1\BizFlyBackup\nssm.exe")){
         Set-Location -Path "C:\progra~1\BizFlyBackup"
-        Clear-Content "agent.yaml" -Force -ErrorAction SilentlyContinue
         Add-Content -Path "agent.yaml" -Value "access_key: $ACCESS_KEY`napi_url: $API_URL`nmachine_id: $MACHINE_ID`nsecret_key: $SECRET_KEY"
         .\nssm restart BizFlyBackup
     }else {
         $arch = GetArchitecture
-        $download_url = "https://nssm.cc/release/nssm-2.24.zip"
-        Invoke-WebRequest -Method Get -UseBasicParsing -Uri $download_url -OutFile "nssm.zip"
-        Expand-Archive -LiteralPath 'nssm.zip' -Force -DestinationPath '.'
-        if ($arch -eq "64bit"){
-            Copy-Item -Path ".\nssm-2.24\win64\nssm.exe" "C:\progra~1\BizFlyBackup"
+        $download_url = "https://github.com/QuocCuong97/Code/raw/master/Temp/nssm/$arch/nssm.exe"
+        Invoke-WebRequest -Method Get -UseBasicParsing -Uri $download_url
+        $current_checksum = (Get-FileHash .\nssm.exe -Algorithm SHA256).Hash
+        $checksum_url = "https://raw.githubusercontent.com/QuocCuong97/Code/master/Temp/nssm/$arch/sha256-checksum.txt"
+        $checksum = Invoke-WebRequest -UseBasicParsing -Uri $checksum_url
+
+        if ($checksum -eq $current_checksum){
+            Move-Item -Path ".\nssm.exe" "C:\progra~1\BizFlyBackup"
+            Set-Location -Path "C:\progra~1\BizFlyBackup"
+            Add-Content -Path "agent.yaml" -Value "access_key: $ACCESS_KEY`napi_url: $API_URL`nmachine_id: $MACHINE_ID`nsecret_key: $SECRET_KEY"
+            .\nssm install BizFlyBackup "C:\progra~1\BizFlyBackup\bizfly-backup.exe"
+            .\nssm set BizFlyBackup Application "C:\progra~1\BizFlyBackup\bizfly-backup.exe"
+            .\nssm set BizFlyBackup AppParameters "agent --config=C:\progra~1\BizFlyBackup\agent.yaml"
+            .\nssm set BizFlyBackup AppThrottle 0
+            .\nssm set BizFlyBackup AppExit 0 Restart
+            .\nssm start BizFlyBackup
         }else {
-            Copy-Item -Path ".\nssm-2.24\win32\nssm.exe" "C:\progra~1\BizFlyBackup"
-        }
-        Set-Location -Path "C:\progra~1\BizFlyBackup"
-        Add-Content -Path "agent.yaml" -Value "access_key: $ACCESS_KEY`napi_url: $API_URL`nmachine_id: $MACHINE_ID`nsecret_key: $SECRET_KEY"
-        .\nssm install BizFlyBackup "C:\progra~1\BizFlyBackup\bizfly-backup.exe"
-        .\nssm set BizFlyBackup Application "C:\progra~1\BizFlyBackup\bizfly-backup.exe"
-        .\nssm set BizFlyBackup AppParameters "agent --config=C:\progra~1\BizFlyBackup\agent.yaml"
-        .\nssm set BizFlyBackup AppThrottle 0
-        .\nssm set BizFlyBackup AppExit 0 Restart
-        .\nssm start BizFlyBackup
-        Remove-Item "~\nssm.zip"
-        Remove-Item "~\nssm-2.24" -Recurse
-    }
-    if (!($env:PATH -Like "*C:\Program Files\BizFlyBackup*")){
-        [System.Environment]::SetEnvironmentVariable("PATH", $env:PATH + "C:\Program Files\BizFlyBackup;", [System.EnvironmentVariableTarget]::User)
-        doskey bizfly-backup.exe=bizfly-backup
+            Write-Error 'Downloaded file checksum does not match (nssm.exe)' -Category MetadataError
+        } 
+        
     }
 }
 
@@ -122,10 +119,11 @@ function upgrade {
 if (checkAdministrator){
     if ([System.IO.File]::Exists("C:\progra~1\BizFlyBackup\bizfly-backup.exe")){
         $current_version = $((\progra~1\BizFlyBackup\bizfly-backup.exe version | Select-String "Version:")  -split ":  ")[1]
+
         $release_url = "https://api.github.com/repos/bizflycloud/bizfly-backup/releases/latest"
         $response = (Invoke-WebRequest -UseBasicParsing -Uri $release_url)
         $lastest_version = (ConvertFrom-Json -InputObject $response).tag_name
-        if ("$current_version" -eq $lastest_version){
+        if ("v$current_version" -eq $lastest_version){
             Clear-Host
             Write-Host "=========================================================================`n"
             Write-Host "Run BizFly Backup Agent`n"
