@@ -26,7 +26,7 @@ function getDownloadURL {
     [Net.ServicePointManager]::SecurityProtocol = "Tls, Tls11, Tls12, Ssl3"
 
     $release_url = "https://api.github.com/repos/bizflycloud/bizfly-backup/releases/latest"
-    $response = (Invoke-WebRequest -UseBasicParsing -Uri $release_url)
+    $response = Invoke-WebRequest -UseBasicParsing -Uri $release_url
     $responseobj = (ConvertFrom-Json -InputObject $response).assets
     $arch = GetArchitecture
     if ($arch -eq "x64"){
@@ -50,6 +50,7 @@ function downloadAgent {
 function runAgentasService {
     if ([System.IO.File]::Exists("C:\progra~1\BizFlyBackup\bizfly-backup.exe") -And [System.IO.File]::Exists("C:\progra~1\BizFlyBackup\nssm.exe")){
         Set-Location -Path "C:\progra~1\BizFlyBackup"
+        Clear-Content "agent.yaml" -Force -ErrorAction SilentlyContinue
         Add-Content -Path "agent.yaml" -Value "access_key: $ACCESS_KEY`napi_url: $API_URL`nmachine_id: $MACHINE_ID`nsecret_key: $SECRET_KEY"
         .\nssm restart BizFlyBackup
     }else {
@@ -70,6 +71,10 @@ function runAgentasService {
             .\nssm set BizFlyBackup AppThrottle 0
             .\nssm set BizFlyBackup AppExit 0 Restart
             .\nssm start BizFlyBackup
+            if (!($env:PATH -Like "*C:\Program Files\BizFlyBackup*")){
+                [System.Environment]::SetEnvironmentVariable("PATH", $env:PATH + "C:\Program Files\BizFlyBackup;", [System.EnvironmentVariableTarget]::User)
+                doskey bizfly-backup.exe=bizfly-backup
+            }
         }else {
             Write-Error 'Downloaded file checksum does not match (nssm.exe)' -Category MetadataError
         } 
@@ -119,7 +124,6 @@ function upgrade {
 if (checkAdministrator){
     if ([System.IO.File]::Exists("C:\progra~1\BizFlyBackup\bizfly-backup.exe")){
         $current_version = $((\progra~1\BizFlyBackup\bizfly-backup.exe version | Select-String "Version:")  -split ":  ")[1]
-
         $release_url = "https://api.github.com/repos/bizflycloud/bizfly-backup/releases/latest"
         $response = (Invoke-WebRequest -UseBasicParsing -Uri $release_url)
         $lastest_version = (ConvertFrom-Json -InputObject $response).tag_name
