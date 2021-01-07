@@ -56,7 +56,7 @@ function runAgentasService {
     }else {
         $arch = GetArchitecture
         $download_url = "https://github.com/QuocCuong97/Code/raw/master/Temp/nssm/$arch/nssm.exe"
-        Invoke-WebRequest -Method Get -UseBasicParsing -Uri $download_url
+        Invoke-WebRequest -Method Get -UseBasicParsing -Uri $download_url -OutFile "nssm.exe"
         $current_checksum = (Get-FileHash .\nssm.exe -Algorithm SHA256).Hash
         $checksum_url = "https://raw.githubusercontent.com/QuocCuong97/Code/master/Temp/nssm/$arch/sha256-checksum.txt"
         $checksum = Invoke-WebRequest -UseBasicParsing -Uri $checksum_url
