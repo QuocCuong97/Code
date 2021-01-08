@@ -61,7 +61,7 @@ function runAgentasService {
         $checksum_url = "https://raw.githubusercontent.com/QuocCuong97/Code/master/Temp/nssm/$arch/sha256-checksum.txt"
         $checksum = Invoke-WebRequest -UseBasicParsing -Uri $checksum_url
 
-        if ($checksum -eq $current_checksum){
+        if ($checksum.Content -eq $current_checksum){
             Move-Item -Path ".\nssm.exe" "C:\progra~1\BizFlyBackup"
             Set-Location -Path "C:\progra~1\BizFlyBackup"
             Add-Content -Path "agent.yaml" -Value "access_key: $ACCESS_KEY`napi_url: $API_URL`nmachine_id: $MACHINE_ID`nsecret_key: $SECRET_KEY"
