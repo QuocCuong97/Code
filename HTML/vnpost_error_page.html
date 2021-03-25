@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <header>
+    <title>Cảnh báo</title>
+    <style>
+    html, body {
+      height: 100%;
+      margin: 0px;
+    }
+
+    .left-column {
+      float: left;
+      text-align: center;
+      width: 40%;
+      height: 100%;
+      padding: 0px;
+    }
+
+    .right-column {
+      float: right;
+      text-align: center;
+      color: white;
+      width: 60%;
+      padding: 0px;
+      height: 100%;
+      background-color: #f79f07;
+    }
+    </style>
+  </header>
+  <body>
+      <div class="left-column">
+        <img class="image-logo" src="http://www.vietstamp.net/forum/attachment.php?attachmentid=182802&d=1364632741" style="width:60%;padding-top: 200px;">
+      </div>
+      <div class="right-column">
+        <p style="font-size: 50px;font-family: Tahoma, Verdana, sans-serif;padding-top: 200px; font-weight: 300;">Bạn không thể truy cập trang này!</p>
+        Parameters in the customized error page:<br>
+        Transaction ID = ${NS_TRANSACTION_ID}<br>
+        Session ID = ${NS_APPFW_SESSION_ID}<br>
+        Session Cookie : ${COOKIE("citrix_ns_id")}<br>
+      </div>
+  </body>
+</html>
